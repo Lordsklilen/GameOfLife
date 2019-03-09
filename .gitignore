@@ -5,7 +5,7 @@
 *.ipch
 .vs/
 x64/
-
+Debug/
 # Prerequisites
 *.d
 

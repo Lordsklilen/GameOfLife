@@ -1,4 +1,5 @@
 #pragma once
+#include "DrawingHelper.h"
 using namespace System;
 using namespace System::ComponentModel;
 using namespace System::Collections;
@@ -15,6 +16,8 @@ namespace CLRWindowOutput {
 			graphics = pictureBox1->CreateGraphics();
 			greenBrush = gcnew SolidBrush(Color::Green);
 			grayBrush = gcnew SolidBrush(Color::Gray);
+			drawingHelper = new DrawingHelper(pictureBox1->Width, pictureBox1->Height,10,10);
+
 		}
 		System::Void MainForm::startbtn_Click(System::Object^  sender, System::EventArgs^  e);
 
@@ -28,15 +31,16 @@ namespace CLRWindowOutput {
 				delete components;
 			}
 		}
-	private: 
+	private:
 		PictureBox^  pictureBox1;
 		Button^  startbtn;
 		System::ComponentModel::Container ^components;
 		Graphics^ graphics;
 		Brush^ greenBrush;
 		Brush^ grayBrush;
+		DrawingHelper *drawingHelper;
 
-	#pragma region Windows Form Designer generated code
+#pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
@@ -75,6 +79,7 @@ namespace CLRWindowOutput {
 			this->ResumeLayout(false);
 
 		}
-	#pragma endregion
+#pragma endregion
 	};
 }
+
