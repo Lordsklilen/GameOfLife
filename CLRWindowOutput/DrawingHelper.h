@@ -9,8 +9,6 @@ using namespace std;
 struct Position {
 	int x;
 	int y;
-	int elWidht;
-	int elHeight;
 };
 
 class DrawingHelper
@@ -18,12 +16,15 @@ class DrawingHelper
 private:
 	int width;
 	int height;
+	int elHeight;
+	int elWidht;
+	Graphics^ *g;
+public:
+
 	int heightSize;
 	int widthSize;
-
-public:
-	DrawingHelper(int _width, int _height, int _heightSize, int _widthSize);
-	void DrawBoard(Graphics^ _g, Brush^ _b,vector<vector<Block>> blockArray, int _size);
+	DrawingHelper(Graphics^ _g, Brush^ greenB, Brush^ grayB,int _width, int _height, int _heightSize, int _widthSize);
+	void DrawBoard(Graphics^, Brush^, Brush^ ,vector<vector<Block>>);
 private:
 	unique_ptr<Position> GetPos(Block block);
 	void DrawBlock(Graphics^ _g, Brush^ _b,unique_ptr<Position> &pos);

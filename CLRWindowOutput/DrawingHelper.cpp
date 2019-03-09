@@ -3,29 +3,34 @@
 
 using namespace std;
 
-DrawingHelper::DrawingHelper(int _width, int _height, int _heightSize, int _widthSize)
+DrawingHelper::DrawingHelper(Graphics^ _g, Brush^ greenB, Brush^ grayB, int _width, int _height, int _heightSize, int _widthSize)
 {
 	width = _width;
 	height = _height;
 	heightSize = _heightSize;
 	widthSize = _widthSize;
+	elHeight = 0;
+	elWidht = 0;
+	g = &_g;
 }
-void DrawingHelper::DrawBoard(Graphics^ _g, Brush^ _b,vector<vector<Block>> blockArray, int size) {
+void DrawingHelper::DrawBoard(Graphics^ _g, Brush^ _gray, Brush^ _green,vector<vector<Block>> blockArray) {
+	elHeight = (height - heightSize) / heightSize;
+	elWidht = (width - widthSize) / widthSize;
 	for each (auto array in blockArray)
 	{
 		for each (auto element in array)
 		{
-			unique_ptr<Position> pos = GetPos(element);
-			this->DrawBlock(_g,_b,std::move(pos));
+			if(element.isAlive)
+				this->DrawBlock(_g,_green, GetPos(element));
+			else
+				this->DrawBlock(_g, _gray, GetPos(element));
 		}
 	}
 }
 unique_ptr<Position> DrawingHelper::GetPos(Block block){
 	unique_ptr<Position> pos = std::make_unique<Position>();
-	pos->elHeight = (height - heightSize) / heightSize;
-	pos->elWidht = (width - widthSize) / widthSize;
-	pos->x = (block.rowNumber * pos->elWidht) + block.rowNumber;
-	pos->y = (block.collumnNumber * pos->elHeight) + block.collumnNumber;
+	pos->x = (block.rowNumber * elWidht) + block.rowNumber;
+	pos->y = (block.collumnNumber * elHeight) + block.collumnNumber;
 	return pos;
 }
 void DrawingHelper::DrawBlock(Graphics^ _g, Brush^ _b,unique_ptr<Position> &pos) {
@@ -33,7 +38,7 @@ void DrawingHelper::DrawBlock(Graphics^ _g, Brush^ _b,unique_ptr<Position> &pos)
 		_b,
 		pos->x,
 		pos->y,
-		pos->elWidht,
-		pos->elHeight
+		elWidht,
+		elHeight
 		);
 }

@@ -1,5 +1,6 @@
 #pragma once
 #include "DrawingHelper.h"
+#include "../GameEngine/EngineFacade.h"
 using namespace System;
 using namespace System::ComponentModel;
 using namespace System::Collections;
@@ -16,7 +17,8 @@ namespace CLRWindowOutput {
 			graphics = pictureBox1->CreateGraphics();
 			greenBrush = gcnew SolidBrush(Color::Green);
 			grayBrush = gcnew SolidBrush(Color::Gray);
-			drawingHelper = new DrawingHelper(pictureBox1->Width, pictureBox1->Height,10,10);
+			drawingHelper = new DrawingHelper(graphics, greenBrush,grayBrush,pictureBox1->Width, pictureBox1->Height,50,100);
+			engine = new EngineFacade();
 
 		}
 		System::Void MainForm::startbtn_Click(System::Object^  sender, System::EventArgs^  e);
@@ -39,6 +41,8 @@ namespace CLRWindowOutput {
 		Brush^ greenBrush;
 		Brush^ grayBrush;
 		DrawingHelper *drawingHelper;
+		DrawingHelper *dh;
+		EngineFacade *engine;
 
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
