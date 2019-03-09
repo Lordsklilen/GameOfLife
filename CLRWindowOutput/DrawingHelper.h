@@ -18,7 +18,6 @@ private:
 	int height;
 	int elHeight;
 	int elWidht;
-	Graphics^ *g;
 public:
 
 	int heightSize;

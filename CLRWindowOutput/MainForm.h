@@ -17,7 +17,7 @@ namespace CLRWindowOutput {
 			graphics = pictureBox1->CreateGraphics();
 			greenBrush = gcnew SolidBrush(Color::Green);
 			grayBrush = gcnew SolidBrush(Color::Gray);
-			drawingHelper = new DrawingHelper(graphics, greenBrush,grayBrush,pictureBox1->Width, pictureBox1->Height,50,100);
+			drawingHelper = new DrawingHelper(graphics, greenBrush,grayBrush,pictureBox1->Width, pictureBox1->Height,25,50);
 			engine = new EngineFacade();
 
 		}

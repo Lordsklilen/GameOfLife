@@ -4,8 +4,8 @@
 
 Block::Block(int row, int collumn)
 {
-	rowNumber = row;
-	collumnNumber = collumn;
+	rowHeight = row;
+	collumnWidth = collumn;
 	isAlive = false;
 }
 

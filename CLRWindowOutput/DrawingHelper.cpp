@@ -11,9 +11,9 @@ DrawingHelper::DrawingHelper(Graphics^ _g, Brush^ greenB, Brush^ grayB, int _wid
 	widthSize = _widthSize;
 	elHeight = 0;
 	elWidht = 0;
-	g = &_g;
 }
 void DrawingHelper::DrawBoard(Graphics^ _g, Brush^ _gray, Brush^ _green,vector<vector<Block>> blockArray) {
+	_g->Clear(Color::White);
 	elHeight = (height - heightSize) / heightSize;
 	elWidht = (width - widthSize) / widthSize;
 	for each (auto array in blockArray)
@@ -29,8 +29,8 @@ void DrawingHelper::DrawBoard(Graphics^ _g, Brush^ _gray, Brush^ _green,vector<v
 }
 unique_ptr<Position> DrawingHelper::GetPos(Block block){
 	unique_ptr<Position> pos = std::make_unique<Position>();
-	pos->x = (block.rowNumber * elWidht) + block.rowNumber;
-	pos->y = (block.collumnNumber * elHeight) + block.collumnNumber;
+	pos->x = (block.rowHeight * elWidht) + block.rowHeight;
+	pos->y = (block.collumnWidth * elHeight) + block.collumnWidth;
 	return pos;
 }
 void DrawingHelper::DrawBlock(Graphics^ _g, Brush^ _b,unique_ptr<Position> &pos) {

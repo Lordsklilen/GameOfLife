@@ -16,7 +16,11 @@ int Main()
 }
 System::Void MainForm::startbtn_Click(System::Object^  sender, System::EventArgs^  e) {
 	
-	auto board = engine->CreateBoard(drawingHelper->heightSize, drawingHelper->widthSize);
-	drawingHelper->DrawBoard(graphics, grayBrush, greenBrush, board.blockBoard);
-
+	engine->CreateBoard(drawingHelper->heightSize, drawingHelper->widthSize);
+	drawingHelper->DrawBoard(graphics, grayBrush, greenBrush, engine->GetBlockBoard());
+	for (int i = 0; i < 5; i++) {
+		engine->NextIteration();
+		System::Threading::Thread::Sleep(1000);
+		drawingHelper->DrawBoard(graphics, grayBrush, greenBrush, engine->GetBlockBoard());
+	}
 }; 

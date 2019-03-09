@@ -2,8 +2,8 @@
 class Block
 {
 public:
-	int rowNumber;
-	int collumnNumber;
+	int rowHeight;
+	int collumnWidth;
 	bool isAlive;
 public:
 	Block(int row, int collumn);
