@@ -14,20 +14,13 @@ namespace CLRWindowOutput {
 		MainForm(void)
 		{
 			InitializeComponent();
-			graphics = pictureBox1->CreateGraphics();
-			greenBrush = gcnew SolidBrush(Color::Green);
-			grayBrush = gcnew SolidBrush(Color::Gray);
-			drawingHelper = new DrawingHelper(graphics, greenBrush,grayBrush,pictureBox1->Width, pictureBox1->Height,25,50);
-			engine = new EngineFacade();
-			engine->CreateBoard(drawingHelper->heightSize, drawingHelper->widthSize);
-			auto bitmap = gcnew Bitmap(pictureBox1->Width, pictureBox1->Height);
-			auto g = Graphics::FromImage((Image^)bitmap);
-			drawingHelper->DrawBoard(g, grayBrush, greenBrush, engine->GetBlockBoard());
-			pictureBox1->Image = (Image^)bitmap;
-
+			InitVariables();
+			InitProgram();
 		}
-		System::Void MainForm::startbtn_Click(System::Object^  sender, System::EventArgs^  e);
-
+		Void startbtn_Click(System::Object^  sender, System::EventArgs^  e);
+		Void stopbtn_Click(System::Object^  sender, System::EventArgs^  e);
+		void InitProgram();
+		void InitVariables();
 	protected:
 
 		~MainForm()
@@ -46,12 +39,16 @@ namespace CLRWindowOutput {
 		Brush^ grayBrush;
 		DrawingHelper *drawingHelper;
 		EngineFacade *engine;
+	public: System::Windows::Forms::Button^  stopbtn;
+
+			System::Windows::Forms::Timer^ myTimer;
 
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
 		{
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->startbtn = (gcnew System::Windows::Forms::Button());
+			this->stopbtn = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -69,15 +66,27 @@ namespace CLRWindowOutput {
 			this->startbtn->Name = L"startbtn";
 			this->startbtn->Size = System::Drawing::Size(75, 23);
 			this->startbtn->TabIndex = 1;
-			this->startbtn->Text = L"Start btn";
+			this->startbtn->Text = L"Start";
 			this->startbtn->UseVisualStyleBackColor = true;
 			this->startbtn->Click += gcnew System::EventHandler(this, &MainForm::startbtn_Click);
+			// 
+			// stopbtn
+			// 
+			this->stopbtn->Enabled = false;
+			this->stopbtn->Location = System::Drawing::Point(94, 12);
+			this->stopbtn->Name = L"stopbtn";
+			this->stopbtn->Size = System::Drawing::Size(75, 23);
+			this->stopbtn->TabIndex = 2;
+			this->stopbtn->Text = L"Stop";
+			this->stopbtn->UseVisualStyleBackColor = true;
+			this->stopbtn->Click += gcnew System::EventHandler(this, &MainForm::stopbtn_Click);
 			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1067, 571);
+			this->Controls->Add(this->stopbtn);
 			this->Controls->Add(this->startbtn);
 			this->Controls->Add(this->pictureBox1);
 			this->Name = L"MainForm";
