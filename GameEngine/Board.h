@@ -12,6 +12,7 @@ public:
 	Board(int,int);
 	~Board();
 	void NextIteration();
+	void ChangeBlockState(int x, int y);
 private:
 	int width;
 	int height;

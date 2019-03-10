@@ -45,12 +45,8 @@ public:
 void MainForm::InitProgram() {
 	engine->CreateBoard(drawingHelper->heightSize, drawingHelper->widthSize);
 	myTimer->Tick += gcnew EventHandler(ThreadExecute::ThreadProc);
-	myTimer->Interval = 500;
-
-	auto bitmap = gcnew Bitmap(pictureBox1->Width, pictureBox1->Height);
-	auto g = Graphics::FromImage((Image^)bitmap);
-	drawingHelper->DrawBoard(g, grayBrush, greenBrush, engine->GetBlockBoard());
-	pictureBox1->Image = (Image^)bitmap;
+	myTimer->Interval = 250;
+	RedrawBoard();
 }
 
 
@@ -63,15 +59,31 @@ void MainForm::InitVariables() {
 	engine = new EngineFacade();
 }
 
+void MainForm::RedrawBoard() {
+	auto bitmap = gcnew Bitmap(pictureBox1->Width, pictureBox1->Height);
+	auto g = Graphics::FromImage((Image^)bitmap);
+	drawingHelper->DrawBoard(g, grayBrush, greenBrush, engine->GetBlockBoard());
+	pictureBox1->Image = (Image^)bitmap;
+}
+
 System::Void MainForm::startbtn_Click(Object^  sender, EventArgs^  e) {
 
 	ThreadExecute::InitThread(this);
+	myTimer->Start();
 	startbtn->Enabled = false;
 	stopbtn->Enabled = true;
-	myTimer->Start();
 };
+
 Void MainForm::stopbtn_Click(Object^  sender, EventArgs^  e) {
 	myTimer->Stop();
 	startbtn->Enabled = true;
 	stopbtn->Enabled = false;
 };
+
+Void MainForm::pictureBox1_MouseClick(Object^  sender, MouseEventArgs^  e) {
+
+	auto pos = drawingHelper->GetClickedBlockPos(e->Location.X, e->Location.Y);
+	engine->SetBlock(pos->y, pos->x);
+	RedrawBoard();
+};
+

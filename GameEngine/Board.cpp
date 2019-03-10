@@ -67,5 +67,8 @@ int Board::CountNeighbours(Block& block) {
 	return counter;
 }
 Board::~Board()
-{
-}
+{}
+
+void Board::ChangeBlockState(int x, int y) {
+	blockBoard[x][y].ChangeState();
+};

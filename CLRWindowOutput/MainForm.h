@@ -17,10 +17,12 @@ namespace CLRWindowOutput {
 			InitVariables();
 			InitProgram();
 		}
-		Void startbtn_Click(System::Object^  sender, System::EventArgs^  e);
-		Void stopbtn_Click(System::Object^  sender, System::EventArgs^  e);
+		Void startbtn_Click(Object^  sender, EventArgs^  e);
+		Void stopbtn_Click(Object^  sender, EventArgs^  e);
+		Void pictureBox1_MouseClick(Object^  sender, MouseEventArgs^  e);
 		void InitProgram();
 		void InitVariables();
+		void RedrawBoard();
 	protected:
 
 		~MainForm()
@@ -39,9 +41,8 @@ namespace CLRWindowOutput {
 		Brush^ grayBrush;
 		DrawingHelper *drawingHelper;
 		EngineFacade *engine;
-	public: System::Windows::Forms::Button^  stopbtn;
-
-			System::Windows::Forms::Timer^ myTimer;
+		Button^  stopbtn;
+		System::Windows::Forms::Timer^ myTimer;
 
 #pragma region Windows Form Designer generated code
 		void InitializeComponent(void)
@@ -59,6 +60,7 @@ namespace CLRWindowOutput {
 			this->pictureBox1->Size = System::Drawing::Size(1042, 512);
 			this->pictureBox1->TabIndex = 0;
 			this->pictureBox1->TabStop = false;
+			this->pictureBox1->MouseClick += gcnew System::Windows::Forms::MouseEventHandler(this, &MainForm::pictureBox1_MouseClick);
 			// 
 			// startbtn
 			// 
@@ -96,6 +98,7 @@ namespace CLRWindowOutput {
 
 		}
 #pragma endregion
+
 	};
 }
 

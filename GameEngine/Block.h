@@ -9,6 +9,7 @@ public:
 	Block(int row, int collumn);
 	Block();
 	~Block();
+	void ChangeState();
 
 };
 

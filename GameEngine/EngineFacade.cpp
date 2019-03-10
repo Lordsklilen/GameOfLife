@@ -19,3 +19,7 @@ Board EngineFacade::NextIteration() {
 vector<vector<Block>> EngineFacade::GetBlockBoard() {
 	return board->blockBoard;
 }
+
+void EngineFacade::SetBlock(int x, int y) {
+	board->ChangeBlockState(x, y);
+};

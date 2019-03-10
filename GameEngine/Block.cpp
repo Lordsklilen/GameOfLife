@@ -8,6 +8,9 @@ Block::Block(int row, int collumn)
 	collumnWidth = collumn;
 	isAlive = false;
 }
+void Block::ChangeState() {
+	isAlive = !isAlive;
+}
 
 Block::Block(){}
 

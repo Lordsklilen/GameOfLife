@@ -24,6 +24,7 @@ public:
 	int widthSize;
 	DrawingHelper(Graphics^ _g, Brush^ greenB, Brush^ grayB,int _width, int _height, int _heightSize, int _widthSize);
 	void DrawBoard(Graphics^, Brush^, Brush^ ,vector<vector<Block>>);
+	unique_ptr<Position> GetClickedBlockPos(int, int);
 private:
 	unique_ptr<Position> GetPos(Block block);
 	void DrawBlock(Graphics^ _g, Brush^ _b,unique_ptr<Position> &pos);

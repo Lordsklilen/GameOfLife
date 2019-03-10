@@ -13,5 +13,6 @@ public:
 	Board CreateBoard(int,int);
 	Board NextIteration();
 	vector<vector<Block>> GetBlockBoard();
+	void SetBlock(int x, int y);
 };
 
