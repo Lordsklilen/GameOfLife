@@ -23,9 +23,6 @@ Board::Board(int width, int height)
 	blockBoard[1][2].isAlive = true;
 	blockBoard[2][2].isAlive = true;
 	blockBoard[3][2].isAlive = true;
-	/*blockBoard[0][0].isAlive = true;
-	blockBoard[0][1].isAlive = true;
-	blockBoard[0][2].isAlive = true;*/
 	this->blockBoard = blockBoard;
 }
 void Board::NextIteration() {

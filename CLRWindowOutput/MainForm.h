@@ -19,10 +19,14 @@ namespace CLRWindowOutput {
 			grayBrush = gcnew SolidBrush(Color::Gray);
 			drawingHelper = new DrawingHelper(graphics, greenBrush,grayBrush,pictureBox1->Width, pictureBox1->Height,25,50);
 			engine = new EngineFacade();
+			engine->CreateBoard(drawingHelper->heightSize, drawingHelper->widthSize);
+			auto bitmap = gcnew Bitmap(pictureBox1->Width, pictureBox1->Height);
+			auto g = Graphics::FromImage((Image^)bitmap);
+			drawingHelper->DrawBoard(g, grayBrush, greenBrush, engine->GetBlockBoard());
+			pictureBox1->Image = (Image^)bitmap;
 
 		}
 		System::Void MainForm::startbtn_Click(System::Object^  sender, System::EventArgs^  e);
-
 
 	protected:
 
@@ -33,7 +37,7 @@ namespace CLRWindowOutput {
 				delete components;
 			}
 		}
-	private:
+	public:
 		PictureBox^  pictureBox1;
 		Button^  startbtn;
 		System::ComponentModel::Container ^components;
@@ -41,7 +45,6 @@ namespace CLRWindowOutput {
 		Brush^ greenBrush;
 		Brush^ grayBrush;
 		DrawingHelper *drawingHelper;
-		DrawingHelper *dh;
 		EngineFacade *engine;
 
 #pragma region Windows Form Designer generated code
