@@ -42,6 +42,8 @@ namespace CLRWindowOutput {
 		DrawingHelper *drawingHelper;
 		EngineFacade *engine;
 		Button^  stopbtn;
+		Label^  label1;
+	public:
 		System::Windows::Forms::Timer^ myTimer;
 
 #pragma region Windows Form Designer generated code
@@ -50,6 +52,7 @@ namespace CLRWindowOutput {
 			this->pictureBox1 = (gcnew System::Windows::Forms::PictureBox());
 			this->startbtn = (gcnew System::Windows::Forms::Button());
 			this->stopbtn = (gcnew System::Windows::Forms::Button());
+			this->label1 = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->SuspendLayout();
 			// 
@@ -83,18 +86,29 @@ namespace CLRWindowOutput {
 			this->stopbtn->UseVisualStyleBackColor = true;
 			this->stopbtn->Click += gcnew System::EventHandler(this, &MainForm::stopbtn_Click);
 			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Location = System::Drawing::Point(942, 17);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(109, 13);
+			this->label1->TabIndex = 3;
+			this->label1->Text = L"Made by Micha³ Dela";
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1067, 571);
+			this->Controls->Add(this->label1);
 			this->Controls->Add(this->stopbtn);
 			this->Controls->Add(this->startbtn);
 			this->Controls->Add(this->pictureBox1);
 			this->Name = L"MainForm";
-			this->Text = L"MainForm";
+			this->Text = L"Game of Life";
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->EndInit();
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 #pragma endregion

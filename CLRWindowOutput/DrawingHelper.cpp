@@ -13,7 +13,6 @@ DrawingHelper::DrawingHelper(Graphics^ _g, Brush^ greenB, Brush^ grayB, int _wid
 	elWidht = 0;
 }
 void DrawingHelper::DrawBoard(Graphics^ _g, Brush^ _gray, Brush^ _green, vector<vector<Block>> blockArray) {
-	_g->Clear(Color::White);
 	elHeight = (height - heightSize) / heightSize;
 	elWidht = (width - widthSize) / widthSize;
 	for each (auto array in blockArray)

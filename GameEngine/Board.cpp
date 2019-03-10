@@ -20,9 +20,6 @@ Board::Board(int width, int height)
 			blockBoard[i][j].isAlive = false;
 		}
 	}
-	blockBoard[1][2].isAlive = true;
-	blockBoard[2][2].isAlive = true;
-	blockBoard[3][2].isAlive = true;
 	this->blockBoard = blockBoard;
 }
 void Board::NextIteration() {
