@@ -8,13 +8,11 @@ EngineFacade::EngineFacade(){
 EngineFacade::~EngineFacade()
 {
 }
-Board EngineFacade::CreateBoard(int x, int y) {
-	this->board = new Board(x, y);
-	return *board;
+void EngineFacade::CreateBoard(int x, int y) {
+	this->board = make_shared<Board>(x,y);
 }
-Board EngineFacade::NextIteration() {
+void EngineFacade::NextIteration() {
 	board->NextIteration();
-	return *board;
 }
 vector<vector<Block>> EngineFacade::GetBlockBoard() {
 	return board->blockBoard;

@@ -6,12 +6,12 @@ using namespace std;
 class EngineFacade
 {
 private:
-	Board* board;
+	shared_ptr<Board> board;
 public:
 	EngineFacade();
 	~EngineFacade();
-	Board CreateBoard(int,int);
-	Board NextIteration();
+	void CreateBoard(int,int);
+	void NextIteration();
 	vector<vector<Block>> GetBlockBoard();
 	void SetBlock(int x, int y);
 };

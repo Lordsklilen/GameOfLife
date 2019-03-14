@@ -37,7 +37,7 @@ void Board::SetState(Block& block) {
 	if (block.isAlive) {
 		if (neighbours == 2 || neighbours == 3)
 			blockBoard[block.collumnWidth][block.rowHeight].isAlive = true;
-		else 
+		else
 			blockBoard[block.collumnWidth][block.rowHeight].isAlive = false;
 	}
 	else {
@@ -48,7 +48,7 @@ void Board::SetState(Block& block) {
 	}
 }
 
-int Board::CountNeighbours(Block& block) {
+int Board::CountNeighbours(Block & block) {
 
 	int counter = 0;
 	for (int i = -1; i <= 1; i++)
@@ -57,7 +57,7 @@ int Board::CountNeighbours(Block& block) {
 		{
 			if (i + block.collumnWidth >= width || j + block.rowHeight >= height || i + block.collumnWidth < 0 || j + block.rowHeight < 0)
 				continue;
-			if (copyBlockBoard[i + block.collumnWidth][j + block.rowHeight].isAlive && !(i==0 && j==0))
+			if (copyBlockBoard[i + block.collumnWidth][j + block.rowHeight].isAlive && !(i == 0 && j == 0))
 				counter++;
 		}
 	}
