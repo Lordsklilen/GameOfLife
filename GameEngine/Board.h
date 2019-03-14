@@ -1,6 +1,8 @@
 #pragma once
 #include <cstdio>
 #include <vector>
+#include <iostream>
+#include <memory>
 #include "../GameEngine/Block.h"
 using namespace std;
 class Board
@@ -8,7 +10,6 @@ class Board
 
 public:
 	vector<vector<Block>>  blockBoard;
-	vector<vector<Block>>  copyBlockBoard;
 	Board(int,int);
 	~Board();
 	void NextIteration();
@@ -16,7 +17,8 @@ public:
 private:
 	int width;
 	int height;
-	void SetState(Block&);
-	int CountNeighbours(Block&);
+	void SetState(shared_ptr<Block> block);
+	int CountNeighbours(shared_ptr<Block> block);
+	vector<vector<Block>>  copyBlockBoard;
 };
 

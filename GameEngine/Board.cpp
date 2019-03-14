@@ -2,7 +2,6 @@
 
 
 
-
 Board::Board(int width, int height)
 {
 	this->width = width;
@@ -28,36 +27,36 @@ void Board::NextIteration() {
 	{
 		for (int j = 0; j < height; j++)
 		{
-			SetState(copyBlockBoard[i][j]);
+			SetState(make_shared<Block>(copyBlockBoard[i][j]));
 		}
 	}
 }
-void Board::SetState(Block& block) {
+void Board::SetState(shared_ptr<Block> block) {
 	int neighbours = CountNeighbours(block);
-	if (block.isAlive) {
+	if (block->isAlive) {
 		if (neighbours == 2 || neighbours == 3)
-			blockBoard[block.collumnWidth][block.rowHeight].isAlive = true;
+			blockBoard[block->collumnWidth][block->rowHeight].isAlive = true;
 		else
-			blockBoard[block.collumnWidth][block.rowHeight].isAlive = false;
+			blockBoard[block->collumnWidth][block->rowHeight].isAlive = false;
 	}
 	else {
 		if (neighbours == 3)
-			blockBoard[block.collumnWidth][block.rowHeight].isAlive = true;
+			blockBoard[block->collumnWidth][block->rowHeight].isAlive = true;
 		else
-			blockBoard[block.collumnWidth][block.rowHeight].isAlive = false;
+			blockBoard[block->collumnWidth][block->rowHeight].isAlive = false;
 	}
 }
 
-int Board::CountNeighbours(Block & block) {
+int Board::CountNeighbours(shared_ptr<Block> block) {
 
 	int counter = 0;
 	for (int i = -1; i <= 1; i++)
 	{
 		for (int j = -1; j <= 1; j++)
 		{
-			if (i + block.collumnWidth >= width || j + block.rowHeight >= height || i + block.collumnWidth < 0 || j + block.rowHeight < 0)
+			if (i + block->collumnWidth >= width || j + block->rowHeight >= height || i + block->collumnWidth < 0 || j + block->rowHeight < 0)
 				continue;
-			if (copyBlockBoard[i + block.collumnWidth][j + block.rowHeight].isAlive && !(i == 0 && j == 0))
+			if (copyBlockBoard[i + block->collumnWidth][j + block->rowHeight].isAlive && !(i == 0 && j == 0))
 				counter++;
 		}
 	}
