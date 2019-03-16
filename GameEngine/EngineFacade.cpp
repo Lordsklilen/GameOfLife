@@ -1,7 +1,10 @@
 #include "EngineFacade.h"
 
 
+
+using namespace std;
 EngineFacade::EngineFacade(){
+	this->GetConfigFile();
 }
 
 
@@ -21,3 +24,6 @@ vector<vector<Block>> EngineFacade::GetBlockBoard() {
 void EngineFacade::SetBlock(int x, int y) {
 	board->ChangeBlockState(x, y);
 };
+void EngineFacade::GetConfigFile() {
+	
+}

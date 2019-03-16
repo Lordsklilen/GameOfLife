@@ -2,11 +2,13 @@
 #include "Board.h"
 #include <cstdio>
 #include <memory>
+
 using namespace std;
 class EngineFacade
 {
 private:
 	shared_ptr<Board> board;
+	void GetConfigFile();
 public:
 	EngineFacade();
 	~EngineFacade();

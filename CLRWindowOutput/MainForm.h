@@ -2,7 +2,8 @@
 #include "DrawingHelper.h"
 #include "../GameEngine/EngineFacade.h"
 #include "main.h"
-
+#include <string>
+#include <map>
 using namespace System;
 using namespace System::ComponentModel;
 using namespace System::Collections;
@@ -15,11 +16,9 @@ namespace CLRWindowOutput {
 	public ref class MainForm : public System::Windows::Forms::Form
 	{
 	public:
-		MainForm(void)
+		MainForm()
 		{
 			InitializeComponent();
-			InitVariables();
-			InitProgram();
 		}
 		Void startbtn_Click(Object^  sender, EventArgs^  e);
 		Void stopbtn_Click(Object^  sender, EventArgs^  e);
@@ -27,6 +26,7 @@ namespace CLRWindowOutput {
 		void InitProgram();
 		void InitVariables();
 		void RedrawBoard();
+		void SetConfig(map<string,int>);
 	protected:
 
 		~MainForm()
@@ -37,6 +37,8 @@ namespace CLRWindowOutput {
 			}
 		}
 	public:
+		int width;
+		int height;
 		PictureBox^  pictureBox1;
 		Button^  startbtn;
 		System::ComponentModel::Container ^components;

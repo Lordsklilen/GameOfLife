@@ -4,8 +4,13 @@
 *.tlog
 *.ipch
 .vs/
-x64/
-Debug/
+packages/
+#debug
+*.cache
+*.asm
+*.idb
+*.metagen
+*.resources
 # Prerequisites
 *.d
 

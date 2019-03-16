@@ -42,8 +42,15 @@ void MainForm::InitVariables() {
 	greenBrush = gcnew SolidBrush(Color::Green);
 	grayBrush = gcnew SolidBrush(Color::Gray);
 	myTimer = gcnew System::Windows::Forms::Timer;
-	drawingHelper = gcnew DrawingHelper(graphics, greenBrush, grayBrush, pictureBox1->Width, pictureBox1->Height, 25, 50);
+	drawingHelper = gcnew DrawingHelper(graphics, greenBrush, grayBrush, pictureBox1->Width, pictureBox1->Height, height,width);
 	engine = EngineFacade();
+}
+
+void MainForm::SetConfig(map<string, int> ConfigData) {
+	width = ConfigData["width"];
+	height = ConfigData["height"];
+	InitVariables();
+	InitProgram();
 }
 
 void MainForm::RedrawBoard() {
@@ -73,4 +80,6 @@ Void MainForm::pictureBox1_MouseClick(Object^  sender, MouseEventArgs^  e) {
 	engine.SetBlock(pos->y, pos->x);
 	RedrawBoard();
 };
+
+
 
