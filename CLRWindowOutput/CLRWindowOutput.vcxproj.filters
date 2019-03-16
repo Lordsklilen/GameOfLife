@@ -43,5 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="..\x64\Debug\Config.csv" />
   </ItemGroup>
 </Project>
