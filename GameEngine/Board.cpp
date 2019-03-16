@@ -54,9 +54,10 @@ int Board::CountNeighbours(shared_ptr<Block> block) {
 	{
 		for (int j = -1; j <= 1; j++)
 		{
-			if (i + block->collumnWidth >= width || j + block->rowHeight >= height || i + block->collumnWidth < 0 || j + block->rowHeight < 0)
-				continue;
-			if (copyBlockBoard[i + block->collumnWidth][j + block->rowHeight].isAlive && !(i == 0 && j == 0))
+			int widthId = (i + block->collumnWidth) >= 0 ? (i + block->collumnWidth) % (width) : width-1;
+			int heightId = (j + block->rowHeight) >= 0 ? (j + block->rowHeight) % (height) : height-1;
+
+			if (copyBlockBoard[widthId][heightId].isAlive && !(i == 0 && j == 0))
 				counter++;
 		}
 	}
