@@ -11,7 +11,7 @@ struct Position {
 	int y;
 };
 
-class DrawingHelper
+ref class DrawingHelper
 {
 private:
 	int width;

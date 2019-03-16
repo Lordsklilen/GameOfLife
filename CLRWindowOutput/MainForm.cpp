@@ -4,46 +4,33 @@ using namespace System;
 using namespace System::Windows::Forms;
 using namespace CLRWindowOutput;
 using namespace System::Threading;
-
-[STAThreadAttribute]
-int Main()
-{
-	Application::EnableVisualStyles();
-	Application::SetCompatibleTextRenderingDefault(false);
-	CLRWindowOutput::MainForm mainForm;
-	Application::Run(%mainForm);
-
-	return 0;
-}
-
+EngineFacade  engine;
 public ref class ThreadExecute
 {
 public:
 	static PictureBox^ pictureBox1;
 	static Brush^ grayBrush;
 	static Brush^ greenBrush;
-	static DrawingHelper *drawingHelper;
-	static EngineFacade *engine;
+	static DrawingHelper^ drawingHelper;
 	static void ThreadExecute::InitThread(MainForm^ form) {
 		pictureBox1 = form->pictureBox1;
 		grayBrush = form->grayBrush;
 		greenBrush = form->greenBrush;
 		drawingHelper = form->drawingHelper;
-		engine = form->engine;
 	}
-	static void ThreadExecute::ThreadProc(Object^ /*myObject*/, EventArgs^ /*myEventArgs*/)
+	static void ThreadExecute::ThreadProc(Object^ , EventArgs^)
 	{
 		auto bitmap = gcnew Bitmap(pictureBox1->Width, pictureBox1->Height);
 		auto g = Graphics::FromImage((Image^)bitmap);
 
-		engine->NextIteration();
-		drawingHelper->DrawBoard(g, grayBrush, greenBrush, engine->GetBlockBoard());
+		engine.NextIteration();
+		drawingHelper->DrawBoard(g, grayBrush, greenBrush, engine.GetBlockBoard());
 		pictureBox1->Image = (Image^)bitmap;
 	}
 };
 
 void MainForm::InitProgram() {
-	engine->CreateBoard(drawingHelper->heightSize, drawingHelper->widthSize);
+	engine.CreateBoard(drawingHelper->heightSize, drawingHelper->widthSize);
 	myTimer->Tick += gcnew EventHandler(ThreadExecute::ThreadProc);
 	myTimer->Interval = 250;
 	RedrawBoard();
@@ -55,14 +42,14 @@ void MainForm::InitVariables() {
 	greenBrush = gcnew SolidBrush(Color::Green);
 	grayBrush = gcnew SolidBrush(Color::Gray);
 	myTimer = gcnew System::Windows::Forms::Timer;
-	drawingHelper = new DrawingHelper(graphics, greenBrush, grayBrush, pictureBox1->Width, pictureBox1->Height, 25, 50);
-	engine = new EngineFacade();
+	drawingHelper = gcnew DrawingHelper(graphics, greenBrush, grayBrush, pictureBox1->Width, pictureBox1->Height, 25, 50);
+	engine = EngineFacade();
 }
 
 void MainForm::RedrawBoard() {
 	auto bitmap = gcnew Bitmap(pictureBox1->Width, pictureBox1->Height);
 	auto g = Graphics::FromImage((Image^)bitmap);
-	drawingHelper->DrawBoard(g, grayBrush, greenBrush, engine->GetBlockBoard());
+	drawingHelper->DrawBoard(g, grayBrush, greenBrush, engine.GetBlockBoard());
 	pictureBox1->Image = (Image^)bitmap;
 }
 
@@ -83,7 +70,7 @@ Void MainForm::stopbtn_Click(Object^  sender, EventArgs^  e) {
 Void MainForm::pictureBox1_MouseClick(Object^  sender, MouseEventArgs^  e) {
 
 	auto pos = drawingHelper->GetClickedBlockPos(e->Location.X, e->Location.Y);
-	engine->SetBlock(pos->y, pos->x);
+	engine.SetBlock(pos->y, pos->x);
 	RedrawBoard();
 };
 

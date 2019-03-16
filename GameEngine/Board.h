@@ -3,7 +3,7 @@
 #include <vector>
 #include <iostream>
 #include <memory>
-#include "../GameEngine/Block.h"
+#include "Block.h"
 using namespace std;
 class Board
 {

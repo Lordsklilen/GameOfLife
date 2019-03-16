@@ -1,13 +1,17 @@
 #pragma once
 #include "DrawingHelper.h"
 #include "../GameEngine/EngineFacade.h"
+#include "main.h"
+
 using namespace System;
 using namespace System::ComponentModel;
 using namespace System::Collections;
 using namespace System::Windows::Forms;
 using namespace System::Data;
 using namespace System::Drawing;
+
 namespace CLRWindowOutput {
+
 	public ref class MainForm : public System::Windows::Forms::Form
 	{
 	public:
@@ -39,8 +43,7 @@ namespace CLRWindowOutput {
 		Graphics^ graphics;
 		Brush^ greenBrush;
 		Brush^ grayBrush;
-		DrawingHelper *drawingHelper;
-		EngineFacade *engine;
+		DrawingHelper^ drawingHelper;
 		Button^  stopbtn;
 		Label^  label1;
 	public:
