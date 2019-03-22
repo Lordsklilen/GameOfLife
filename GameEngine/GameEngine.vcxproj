@@ -149,6 +149,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Block.h" />
+    <ClInclude Include="Board.h" />
+    <ClInclude Include="EngineFacade.h" />
+    <ClInclude Include="RLEHelper.h" />
+    <ClInclude Include="RLEstorage.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Block.cpp" />
+    <ClCompile Include="Board.cpp" />
+    <ClCompile Include="EngineFacade.cpp" />
+    <ClCompile Include="RLEHelper.cpp" />
+    <ClCompile Include="RLEstorage.cpp" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

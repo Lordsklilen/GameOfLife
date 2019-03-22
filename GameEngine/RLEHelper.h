@@ -11,9 +11,9 @@ using namespace std::experimental::filesystem::v1;
 using namespace std;
 class RLEHelper
 {
-	ostringstream CreateOutputStream(shared_ptr <RLEstorage> storage);
+	string CreateOutputStream(shared_ptr <RLEstorage> storage);
 public:
-	void SaveFile(shared_ptr <RLEstorage> storage);
+	bool SaveFile(shared_ptr <RLEstorage> storage);
 	shared_ptr <RLEstorage>LoadFile(string path);
 	RLEHelper();
 	~RLEHelper();

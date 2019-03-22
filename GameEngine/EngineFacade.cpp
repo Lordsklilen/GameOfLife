@@ -3,7 +3,7 @@
 
 
 using namespace std;
-EngineFacade::EngineFacade(){
+EngineFacade::EngineFacade() {
 	this->GetConfigFile();
 	this->fileManager = make_shared<RLEHelper>();
 }
@@ -13,7 +13,7 @@ EngineFacade::~EngineFacade()
 {
 }
 void EngineFacade::CreateBoard(int x, int y) {
-	this->board = make_shared<Board>(x,y);
+	this->board = make_shared<Board>(x, y);
 }
 void EngineFacade::NextIteration() {
 	board->NextIteration();
@@ -27,7 +27,7 @@ void EngineFacade::SetBlock(int x, int y) {
 };
 
 void EngineFacade::GetConfigFile() {
-	
+
 }
 
 
@@ -39,7 +39,7 @@ void EngineFacade::SaveFile(string path) {
 	fileManager->SaveFile(state);
 }
 shared_ptr<RLEstorage> EngineFacade::CreateGameState(string path) {
-	shared_ptr<RLEstorage> state= make_shared<RLEstorage>();
+	shared_ptr<RLEstorage> state = make_shared<RLEstorage>();
 	state->blockBoard = this->board->blockBoard;
 	state->path = path;
 	state->x = this->board->x;

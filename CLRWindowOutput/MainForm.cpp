@@ -18,7 +18,7 @@ public:
 		greenBrush = form->greenBrush;
 		drawingHelper = form->drawingHelper;
 	}
-	static void ThreadExecute::ThreadProc(Object^ , EventArgs^)
+	static void ThreadExecute::ThreadProc(Object^, EventArgs^)
 	{
 		auto bitmap = gcnew Bitmap(pictureBox1->Width, pictureBox1->Height);
 		auto g = Graphics::FromImage((Image^)bitmap);
@@ -42,7 +42,7 @@ void MainForm::InitVariables() {
 	greenBrush = gcnew SolidBrush(Color::Green);
 	grayBrush = gcnew SolidBrush(Color::Gray);
 	myTimer = gcnew System::Windows::Forms::Timer;
-	drawingHelper = gcnew DrawingHelper(graphics, greenBrush, grayBrush, pictureBox1->Width, pictureBox1->Height, height,width);
+	drawingHelper = gcnew DrawingHelper(graphics, greenBrush, grayBrush, pictureBox1->Width, pictureBox1->Height, height, width);
 	engine = EngineFacade();
 }
 
@@ -82,6 +82,7 @@ Void MainForm::pictureBox1_MouseClick(Object^  sender, MouseEventArgs^  e) {
 };
 Void MainForm::saveGameStateToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 	engine.SaveFile("./");
+	MessageBox::Show("Saved successfully", "Save state");
 }
 
 

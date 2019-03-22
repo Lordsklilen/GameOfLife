@@ -8,19 +8,23 @@ RLEHelper::RLEHelper()
 RLEHelper::~RLEHelper()
 {
 }
-void RLEHelper::SaveFile(shared_ptr <RLEstorage> storage) {
-	
+bool RLEHelper::SaveFile(shared_ptr <RLEstorage> storage) {
+
 	ofstream outfile;
-
-
-
-	outfile.open("C:\\Users\\Dela_\\source\\repos\\GameOfLife\\x64\\Debug\\temp.rle");
-	auto stream = CreateOutputStream(storage).str();
-	outfile << stream;
-	outfile.close();
+	try {
+		outfile.open("C:\\Users\\Dela_\\source\\repos\\GameOfLife\\x64\\Debug\\temp.rle");
+		auto stream = CreateOutputStream(storage);
+		outfile << stream;
+		outfile.close();
+	}
+	catch (std::exception& e)
+	{
+		return false;
+	}
+	return true;
 }
 
-ostringstream RLEHelper::CreateOutputStream(shared_ptr <RLEstorage> storage) {
+string RLEHelper::CreateOutputStream(shared_ptr <RLEstorage> storage) {
 
 	std::ostringstream ss;
 	ss << "x = " << storage->x << ", y = " << storage->y << "\n";
@@ -28,18 +32,18 @@ ostringstream RLEHelper::CreateOutputStream(shared_ptr <RLEstorage> storage) {
 	char alive = 'o';
 	for each (auto row in storage->blockBoard)
 	{
-		char currentChar = 'n'; 
-		int counter= 0;
+		char currentChar = 'n';
+		int counter = 0;
 		for each (auto cell in row)
 		{
 			counter++;
-			if (currentChar=='n') {
+			if (currentChar == 'n') {
 				if (cell.isAlive)
 					currentChar = alive;
 				else
 					currentChar = dead;
 			}
-			
+
 			if (cell.isAlive && currentChar == 'b') {
 				ss << dead << counter;
 				currentChar = alive;
@@ -54,5 +58,5 @@ ostringstream RLEHelper::CreateOutputStream(shared_ptr <RLEstorage> storage) {
 		ss << currentChar << counter;
 		ss << "$\n";
 	}
-	return ss;
+	return ss.str();
 }
