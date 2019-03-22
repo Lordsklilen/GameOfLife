@@ -1,4 +1,5 @@
 #include "MainForm.h"
+//#include <msclr/marshal_cppstd.h>
 #include "../GameEngine/Board.h"
 using namespace System;
 using namespace System::Windows::Forms;
@@ -81,8 +82,31 @@ Void MainForm::pictureBox1_MouseClick(Object^  sender, MouseEventArgs^  e) {
 	RedrawBoard();
 };
 Void MainForm::saveGameStateToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-	engine.SaveFile("./");
-	MessageBox::Show("Saved successfully", "Save state");
+	string filePath = ChooseFile();
+	if (engine.SaveFile(filePath)) {
+		MessageBox::Show("Saved successfully", "Save state");
+	}
+	else {
+		MessageBox::Show("Error occured", "Something went wrong");
+	
+	}
 }
 
 
+void MarshalString(String ^ s, string& os) {
+	using namespace Runtime::InteropServices;
+	const char* chars =
+		(const char*)(Marshal::StringToHGlobalAnsi(s)).ToPointer();
+	os = chars;
+	Marshal::FreeHGlobal(IntPtr((void*)chars));
+}
+string MainForm::ChooseFile() {
+	SaveFileDialog^ sfd = gcnew SaveFileDialog();
+	string path = "";
+	sfd->Filter = "Pliki RLE (*.rle)|*.rle|Wszystkie pliki (*.*)|*.*";
+	if (sfd->ShowDialog() == ::DialogResult::OK)
+	{
+		MarshalString(sfd->FileName->ToString(), path);		
+	}
+	return path;
+}

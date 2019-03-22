@@ -34,9 +34,9 @@ void EngineFacade::GetConfigFile() {
 void EngineFacade::LoadFile(string path) {
 
 }
-void EngineFacade::SaveFile(string path) {
+bool EngineFacade::SaveFile(string path) {
 	auto state = CreateGameState(path);
-	fileManager->SaveFile(state);
+	return fileManager->SaveFile(state);
 }
 shared_ptr<RLEstorage> EngineFacade::CreateGameState(string path) {
 	shared_ptr<RLEstorage> state = make_shared<RLEstorage>();

@@ -28,6 +28,7 @@ namespace CLRWindowOutput {
 		void InitVariables();
 		void RedrawBoard();
 		void SetConfig(map<string,int>);
+		string ChooseFile();
 	protected:
 
 		~MainForm()

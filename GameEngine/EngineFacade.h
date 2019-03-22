@@ -18,7 +18,7 @@ public:
 	~EngineFacade();
 	void CreateBoard(int, int);
 	void LoadFile(string path);
-	void SaveFile(string path);
+	bool SaveFile(string path);
 	void NextIteration();
 	vector<vector<Block>> GetBlockBoard();
 	void SetBlock(int x, int y);

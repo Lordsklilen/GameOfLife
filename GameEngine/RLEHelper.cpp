@@ -12,7 +12,7 @@ bool RLEHelper::SaveFile(shared_ptr <RLEstorage> storage) {
 
 	ofstream outfile;
 	try {
-		outfile.open("C:\\Users\\Dela_\\source\\repos\\GameOfLife\\x64\\Debug\\temp.rle");
+		outfile.open(storage->path);
 		auto stream = CreateOutputStream(storage);
 		outfile << stream;
 		outfile.close();
