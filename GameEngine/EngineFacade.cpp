@@ -5,6 +5,7 @@
 using namespace std;
 EngineFacade::EngineFacade(){
 	this->GetConfigFile();
+	this->fileManager = make_shared<RLEHelper>();
 }
 
 
@@ -24,6 +25,16 @@ vector<vector<Block>> EngineFacade::GetBlockBoard() {
 void EngineFacade::SetBlock(int x, int y) {
 	board->ChangeBlockState(x, y);
 };
+
 void EngineFacade::GetConfigFile() {
 	
+}
+
+
+void EngineFacade::LoadFile(string path) {
+
+}
+void EngineFacade::SaveFile(string path) {
+
+
 }

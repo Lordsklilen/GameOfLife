@@ -1,39 +1,50 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
+    <Filter Include="DataObjects">
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="Header Files">
+    <Filter Include="Engine">
+      <UniqueIdentifier>{325c4af4-ef47-4d2e-bfa5-269a0cf40d69}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DAL">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="EngineFacade.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Block.h">
+      <Filter>DataObjects</Filter>
     </ClInclude>
     <ClInclude Include="Board.h">
-      <Filter>Header Files</Filter>
+      <Filter>DataObjects</Filter>
     </ClInclude>
-    <ClInclude Include="Block.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="EngineFacade.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="RLEHelper.h">
+      <Filter>DAL</Filter>
+    </ClInclude>
+    <ClInclude Include="RLEstorage.h">
+      <Filter>DataObjects</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="EngineFacade.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Board.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>DataObjects</Filter>
     </ClCompile>
     <ClCompile Include="Block.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>DataObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineFacade.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="RLEHelper.cpp">
+      <Filter>DAL</Filter>
+    </ClCompile>
+    <ClCompile Include="RLEstorage.cpp">
+      <Filter>DataObjects</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
