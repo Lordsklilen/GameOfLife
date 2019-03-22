@@ -1,48 +1,94 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    <Filter Include="WindowsOutput">
+      <UniqueIdentifier>{78d83366-c654-47fd-a359-30bab68ed415}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files">
+    <Filter Include="WindowsOutput\Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
+    <Filter Include="WindowsOutput\Resource Files">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="WindowsOutput\Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="DAL">
+      <UniqueIdentifier>{b6c49451-61b3-4ec8-a925-98468f5e880f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="DataObjects">
+      <UniqueIdentifier>{fa07c7ce-963d-44fb-92a6-a5b194bd6402}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{480bd3a8-76a6-4486-8c6c-10882a87dd4b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="MainForm.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="WindowOutput\MainForm.cpp">
+      <Filter>WindowsOutput\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DrawingHelper.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="WindowOutput\DrawingHelper.cpp">
+      <Filter>WindowsOutput\Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="WindowOutput\main.cpp">
+      <Filter>WindowsOutput\Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\RLEHelper.cpp">
+      <Filter>DAL</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Block.cpp">
+      <Filter>DataObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\Board.cpp">
+      <Filter>DataObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\RLEstorage.cpp">
+      <Filter>DataObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine\EngineFacade.cpp">
+      <Filter>Engine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="MainForm.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="WindowOutput\DrawingHelper.h">
+      <Filter>WindowsOutput\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DrawingHelper.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="WindowOutput\main.h">
+      <Filter>WindowsOutput\Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="main.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="WindowOutput\MainForm.h">
+      <Filter>WindowsOutput\Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\RLEHelper.h">
+      <Filter>DAL</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Block.h">
+      <Filter>DataObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\Board.h">
+      <Filter>DataObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\RLEstorage.h">
+      <Filter>DataObjects</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngine\EngineFacade.h">
+      <Filter>Engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MainForm.resx">
-      <Filter>Resource Files</Filter>
+      <Filter>WindowsOutput\Resource Files</Filter>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-    <None Include="..\x64\Debug\Config.csv" />
+    <None Include="..\x64\Debug\Config.csv">
+      <Filter>WindowsOutput</Filter>
+    </None>
+    <None Include="packages.config">
+      <Filter>WindowsOutput</Filter>
+    </None>
   </ItemGroup>
 </Project>
