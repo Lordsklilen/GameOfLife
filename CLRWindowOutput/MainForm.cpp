@@ -1,5 +1,4 @@
 #include "MainForm.h"
-//#include <msclr/marshal_cppstd.h>
 #include "../GameEngine/Board.h"
 using namespace System;
 using namespace System::Windows::Forms;
@@ -82,13 +81,21 @@ Void MainForm::pictureBox1_MouseClick(Object^  sender, MouseEventArgs^  e) {
 	RedrawBoard();
 };
 Void MainForm::saveGameStateToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-	string filePath = ChooseFile();
+	string filePath = ChooseSaveFile();
 	if (engine.SaveFile(filePath)) {
 		MessageBox::Show("Saved successfully", "Save state");
 	}
 	else {
 		MessageBox::Show("Error occured", "Something went wrong");
-	
+	}
+}
+Void MainForm::loadGameStateToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+	string filePath = ChooseLoadFile();
+	if (engine.LoadFile(filePath)) {
+		MessageBox::Show("Opened successfully", "Load state");
+	}
+	else {
+		MessageBox::Show("Error occured", "Something went wrong");
 	}
 }
 
@@ -100,13 +107,25 @@ void MarshalString(String ^ s, string& os) {
 	os = chars;
 	Marshal::FreeHGlobal(IntPtr((void*)chars));
 }
-string MainForm::ChooseFile() {
+
+
+string MainForm::ChooseSaveFile() {
 	SaveFileDialog^ sfd = gcnew SaveFileDialog();
 	string path = "";
 	sfd->Filter = "Pliki RLE (*.rle)|*.rle|Wszystkie pliki (*.*)|*.*";
 	if (sfd->ShowDialog() == ::DialogResult::OK)
 	{
 		MarshalString(sfd->FileName->ToString(), path);		
+	}
+	return path;
+}
+string MainForm::ChooseLoadFile() {
+	OpenFileDialog ^ sfd = gcnew OpenFileDialog();
+	string path = "";
+	sfd->Filter = "Pliki RLE (*.rle)|*.rle|Wszystkie pliki (*.*)|*.*";
+	if (sfd->ShowDialog() == ::DialogResult::OK)
+	{
+		MarshalString(sfd->FileName->ToString(), path);
 	}
 	return path;
 }

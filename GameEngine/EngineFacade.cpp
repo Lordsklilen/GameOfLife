@@ -31,8 +31,9 @@ void EngineFacade::GetConfigFile() {
 }
 
 
-void EngineFacade::LoadFile(string path) {
-
+bool EngineFacade::LoadFile(string path) {
+	auto storage = fileManager->LoadFile(path);
+	return true;
 }
 bool EngineFacade::SaveFile(string path) {
 	auto state = CreateGameState(path);

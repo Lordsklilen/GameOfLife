@@ -8,6 +8,26 @@ RLEHelper::RLEHelper()
 RLEHelper::~RLEHelper()
 {
 }
+
+shared_ptr <RLEstorage> RLEHelper::LoadFile(string path) {
+
+	shared_ptr <RLEstorage> storage;
+	ifstream file;
+	try {
+		file.open(path);
+
+		file.close();
+	}
+	catch (exception& e)
+	{
+		return false;
+	}
+	return storage;
+}
+
+
+
+
 bool RLEHelper::SaveFile(shared_ptr <RLEstorage> storage) {
 
 	ofstream outfile;
@@ -17,7 +37,7 @@ bool RLEHelper::SaveFile(shared_ptr <RLEstorage> storage) {
 		outfile << stream;
 		outfile.close();
 	}
-	catch (std::exception& e)
+	catch (exception& e)
 	{
 		return false;
 	}

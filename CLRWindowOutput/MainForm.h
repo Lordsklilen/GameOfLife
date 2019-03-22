@@ -23,12 +23,14 @@ namespace CLRWindowOutput {
 		Void startbtn_Click(Object^  sender, EventArgs^  e);
 		Void stopbtn_Click(Object^  sender, EventArgs^  e);
 		Void pictureBox1_MouseClick(Object^  sender, MouseEventArgs^  e);
-		Void saveGameStateToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+		Void saveGameStateToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e); 
+		Void loadGameStateToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 		void InitProgram();
 		void InitVariables();
 		void RedrawBoard();
 		void SetConfig(map<string,int>);
-		string ChooseFile();
+		string ChooseSaveFile();
+		string ChooseLoadFile();
 	protected:
 
 		~MainForm()
@@ -138,6 +140,7 @@ namespace CLRWindowOutput {
 			this->loadGameStateToolStripMenuItem->Name = L"loadGameStateToolStripMenuItem";
 			this->loadGameStateToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->loadGameStateToolStripMenuItem->Text = L"Load game state";
+			this->loadGameStateToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::loadGameStateToolStripMenuItem_Click);
 			// 
 			// mapTemplatesToolStripMenuItem
 			// 
@@ -165,6 +168,7 @@ namespace CLRWindowOutput {
 
 		}
 #pragma endregion
+
 
 };
 }
