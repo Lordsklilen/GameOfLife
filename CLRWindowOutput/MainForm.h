@@ -28,7 +28,7 @@ namespace CLRWindowOutput {
 		void InitProgram();
 		void InitVariables();
 		void RedrawBoard();
-		void SetConfig(map<string,int>);
+		void SetConfig(shared_ptr<RLEstorage> storage);
 		string ChooseSaveFile();
 		string ChooseLoadFile();
 	protected:

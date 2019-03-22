@@ -46,9 +46,9 @@ void MainForm::InitVariables() {
 	engine = EngineFacade();
 }
 
-void MainForm::SetConfig(map<string, int> ConfigData) {
-	width = ConfigData["width"];
-	height = ConfigData["height"];
+void MainForm::SetConfig(shared_ptr<RLEstorage> storage) {
+	width = storage==nullptr? 50: storage->y;
+	height = storage == nullptr? 25 : storage->x;
 	InitVariables();
 	InitProgram();
 }
@@ -91,12 +91,13 @@ Void MainForm::saveGameStateToolStripMenuItem_Click(System::Object^  sender, Sys
 }
 Void MainForm::loadGameStateToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 	string filePath = ChooseLoadFile();
-	if (engine.LoadFile(filePath)) {
-		MessageBox::Show("Opened successfully", "Load state");
-	}
-	else {
-		MessageBox::Show("Error occured", "Something went wrong");
-	}
+	auto storage = engine.LoadFile(filePath);
+	//SetConfig(storage);
+	width = storage == nullptr ? 50 : storage->y;
+	height = storage == nullptr ? 25 : storage->x;
+	drawingHelper = gcnew DrawingHelper(graphics, greenBrush, grayBrush, pictureBox1->Width, pictureBox1->Height, height, width);
+	RedrawBoard();
+	//MessageBox::Show("Opened successfully", "Load state");
 }
 
 

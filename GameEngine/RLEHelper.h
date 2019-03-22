@@ -11,6 +11,8 @@ using namespace std::experimental::filesystem::v1;
 using namespace std;
 class RLEHelper
 {
+
+	int GetNumberOfDigits(int i);
 	string CreateOutputStream(shared_ptr <RLEstorage> storage);
 public:
 	bool SaveFile(shared_ptr <RLEstorage> storage);

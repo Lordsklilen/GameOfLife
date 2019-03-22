@@ -22,7 +22,7 @@ int Main()
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 	MainForm mainForm;
-	mainForm.SetConfig(ReadConfig());
+	mainForm.SetConfig(nullptr);
 	Application::Run(%mainForm);
 	return 0;
 }

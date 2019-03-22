@@ -12,12 +12,11 @@ private:
 	shared_ptr<Board> board;
 	shared_ptr<RLEHelper> fileManager;
 	shared_ptr <RLEstorage> CreateGameState(string path);
-	void GetConfigFile();
 public:
 	EngineFacade();
 	~EngineFacade();
 	void CreateBoard(int, int);
-	bool LoadFile(string path);
+	shared_ptr<RLEstorage> LoadFile(string path);
 	bool SaveFile(string path);
 	void NextIteration();
 	vector<vector<Block>> GetBlockBoard();

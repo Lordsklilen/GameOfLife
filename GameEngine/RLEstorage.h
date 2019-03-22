@@ -6,6 +6,7 @@ using namespace std;
 class RLEstorage
 {
 public:
+	RLEstorage();
 	string path;
 	int x, y;
 	vector<vector<Block>>  blockBoard;

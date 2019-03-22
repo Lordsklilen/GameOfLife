@@ -1,4 +1,5 @@
 #include "RLEHelper.h"
+#include <string>  
 
 RLEHelper::RLEHelper()
 {
@@ -9,13 +10,46 @@ RLEHelper::~RLEHelper()
 {
 }
 
+int RLEHelper::GetNumberOfDigits(int i)
+{
+	return i > 0 ? (int)log10((double)i) + 1 : 1;
+}
 shared_ptr <RLEstorage> RLEHelper::LoadFile(string path) {
 
-	shared_ptr <RLEstorage> storage;
+	shared_ptr <RLEstorage> storage = make_shared<RLEstorage>();
 	ifstream file;
 	try {
 		file.open(path);
-
+		string line;
+		getline(file, line, '=');
+		file >> line;
+		storage->x = stoi(line);
+		getline(file, line, '=');
+		file >> line;
+		storage->y = stoi(line);
+		getline(file, line);
+		char typ;
+		int i = 0;
+		while (getline(file, line))
+		{
+			storage->blockBoard.push_back(vector<Block>());
+			int j = 0;
+			typ = line[0];
+			while (typ != '$') {
+				line.erase(0, 1);
+				int counter = stoi(line);
+				line.erase(0, GetNumberOfDigits(counter));
+				for (int tmp = 0; tmp < counter; tmp++) {
+					if(typ == 'o')
+						storage->blockBoard[i].push_back(Block( j + tmp,i, true));
+					else
+						storage->blockBoard[i].push_back(Block(j + tmp,i , false));
+				}
+				j+= counter;
+				typ = line[0];
+			}
+			i++;
+		}
 		file.close();
 	}
 	catch (exception& e)

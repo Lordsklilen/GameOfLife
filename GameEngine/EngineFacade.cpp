@@ -4,7 +4,6 @@
 
 using namespace std;
 EngineFacade::EngineFacade() {
-	this->GetConfigFile();
 	this->fileManager = make_shared<RLEHelper>();
 }
 
@@ -26,14 +25,12 @@ void EngineFacade::SetBlock(int x, int y) {
 	board->ChangeBlockState(x, y);
 };
 
-void EngineFacade::GetConfigFile() {
-
-}
-
-
-bool EngineFacade::LoadFile(string path) {
+shared_ptr<RLEstorage> EngineFacade::LoadFile(string path) {
 	auto storage = fileManager->LoadFile(path);
-	return true;
+	this->board->blockBoard = storage->blockBoard;
+	this->board->x = storage->x;
+	this->board->y = storage->y;
+	return storage;
 }
 bool EngineFacade::SaveFile(string path) {
 	auto state = CreateGameState(path);

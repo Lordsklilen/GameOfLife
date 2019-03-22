@@ -1,6 +1,11 @@
 #include "Block.h"
 
-
+Block::Block(int row, int collumn,bool alive)
+{
+	rowHeight = row;
+	collumnWidth = collumn;
+	isAlive = alive;
+}
 
 Block::Block(int row, int collumn)
 {
