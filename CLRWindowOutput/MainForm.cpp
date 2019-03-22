@@ -80,26 +80,6 @@ Void MainForm::pictureBox1_MouseClick(Object^  sender, MouseEventArgs^  e) {
 	engine.SetBlock(pos->y, pos->x);
 	RedrawBoard();
 };
-Void MainForm::saveGameStateToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-	string filePath = ChooseSaveFile();
-	if (engine.SaveFile(filePath)) {
-		MessageBox::Show("Saved successfully", "Save state");
-	}
-	else {
-		MessageBox::Show("Error occured", "Something went wrong");
-	}
-}
-Void MainForm::loadGameStateToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
-	string filePath = ChooseLoadFile();
-	auto storage = engine.LoadFile(filePath);
-	//SetConfig(storage);
-	width = storage == nullptr ? 50 : storage->y;
-	height = storage == nullptr ? 25 : storage->x;
-	drawingHelper = gcnew DrawingHelper(graphics, greenBrush, grayBrush, pictureBox1->Width, pictureBox1->Height, height, width);
-	RedrawBoard();
-	//MessageBox::Show("Opened successfully", "Load state");
-}
-
 
 void MarshalString(String ^ s, string& os) {
 	using namespace Runtime::InteropServices;
@@ -109,24 +89,33 @@ void MarshalString(String ^ s, string& os) {
 	Marshal::FreeHGlobal(IntPtr((void*)chars));
 }
 
-
-string MainForm::ChooseSaveFile() {
+Void MainForm::saveGameStateToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 	SaveFileDialog^ sfd = gcnew SaveFileDialog();
 	string path = "";
 	sfd->Filter = "Pliki RLE (*.rle)|*.rle|Wszystkie pliki (*.*)|*.*";
 	if (sfd->ShowDialog() == ::DialogResult::OK)
 	{
-		MarshalString(sfd->FileName->ToString(), path);		
+		MarshalString(sfd->FileName->ToString(), path);
+		if (engine.SaveFile(path)) {
+			MessageBox::Show("Saved successfully", "Save state");
+		}
+		else {
+			MessageBox::Show("Error occured", "Something went wrong");
+		}
 	}
-	return path;
 }
-string MainForm::ChooseLoadFile() {
+
+Void MainForm::loadGameStateToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
 	OpenFileDialog ^ sfd = gcnew OpenFileDialog();
 	string path = "";
 	sfd->Filter = "Pliki RLE (*.rle)|*.rle|Wszystkie pliki (*.*)|*.*";
 	if (sfd->ShowDialog() == ::DialogResult::OK)
 	{
 		MarshalString(sfd->FileName->ToString(), path);
+		auto storage = engine.LoadFile(path);
+		width = storage == nullptr ? 50 : storage->y;
+		height = storage == nullptr ? 25 : storage->x;
+		drawingHelper = gcnew DrawingHelper(graphics, greenBrush, grayBrush, pictureBox1->Width, pictureBox1->Height, height, width);
+		RedrawBoard();
 	}
-	return path;
 }
