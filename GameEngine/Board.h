@@ -14,9 +14,9 @@ public:
 	~Board();
 	void NextIteration();
 	void ChangeBlockState(int x, int y);
+	int x;
+	int y;
 private:
-	int width;
-	int height;
 	void SetState(shared_ptr<Block> block);
 	int CountNeighbours(shared_ptr<Block> block);
 	vector<vector<Block>>  copyBlockBoard;

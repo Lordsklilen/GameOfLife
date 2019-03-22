@@ -80,6 +80,8 @@ Void MainForm::pictureBox1_MouseClick(Object^  sender, MouseEventArgs^  e) {
 	engine.SetBlock(pos->y, pos->x);
 	RedrawBoard();
 };
-
+Void MainForm::saveGameStateToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+	engine.SaveFile("./");
+}
 
 

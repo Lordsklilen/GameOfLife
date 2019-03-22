@@ -19,9 +19,6 @@ const string CONFIGPATH = "C:\\Users\\Dela_\\source\\repos\\GameOfLife\\x64\\Deb
 [STAThreadAttribute]
 int Main()
 {
-	
-
-
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 	MainForm mainForm;

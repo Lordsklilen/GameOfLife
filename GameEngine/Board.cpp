@@ -4,8 +4,8 @@
 
 Board::Board(int width, int height)
 {
-	this->width = width;
-	this->height = height;
+	this->x = width;
+	this->y = height;
 	vector<vector<Block> > blockBoard(
 		width,
 		vector<Block>(height)
@@ -23,9 +23,9 @@ Board::Board(int width, int height)
 }
 void Board::NextIteration() {
 	copyBlockBoard = this->blockBoard;
-	for (int i = 0; i < width; i++)
+	for (int i = 0; i < x; i++)
 	{
-		for (int j = 0; j < height; j++)
+		for (int j = 0; j < y; j++)
 		{
 			SetState(make_shared<Block>(copyBlockBoard[i][j]));
 		}
@@ -54,8 +54,8 @@ int Board::CountNeighbours(shared_ptr<Block> block) {
 	{
 		for (int j = -1; j <= 1; j++)
 		{
-			int widthId = (i + block->collumnWidth) >= 0 ? (i + block->collumnWidth) % (width) : width-1;
-			int heightId = (j + block->rowHeight) >= 0 ? (j + block->rowHeight) % (height) : height-1;
+			int widthId = (i + block->collumnWidth) >= 0 ? (i + block->collumnWidth) % (x) : x-1;
+			int heightId = (j + block->rowHeight) >= 0 ? (j + block->rowHeight) % (y) : y-1;
 
 			if (copyBlockBoard[widthId][heightId].isAlive && !(i == 0 && j == 0))
 				counter++;

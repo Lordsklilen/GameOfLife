@@ -11,6 +11,7 @@ class EngineFacade
 private:
 	shared_ptr<Board> board;
 	shared_ptr<RLEHelper> fileManager;
+	shared_ptr <RLEstorage> CreateGameState(string path);
 	void GetConfigFile();
 public:
 	EngineFacade();

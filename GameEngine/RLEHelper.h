@@ -11,8 +11,8 @@ using namespace std;
 class RLEHelper
 {
 public:
-	void SaveFile(RLEstorage storage);
-	RLEstorage LoadFile(string path);
+	void SaveFile(shared_ptr <RLEstorage> storage);
+	shared_ptr <RLEstorage>LoadFile(string path);
 	RLEHelper();
 	~RLEHelper();
 };
