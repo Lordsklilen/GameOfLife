@@ -119,3 +119,14 @@ Void MainForm::loadGameStateToolStripMenuItem_Click(System::Object^  sender, Sys
 		RedrawBoard();
 	}
 }
+
+Void MainForm::templateToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+	auto senderText = ((ToolStripMenuItem^)sender);
+	string name;
+	MarshalString(senderText->Text, name);
+	auto storage = engine.LoadTemplate(name);
+	width = storage == nullptr ? 50 : storage->y;
+	height = storage == nullptr ? 25 : storage->x;
+	drawingHelper = gcnew DrawingHelper(graphics, greenBrush, grayBrush, pictureBox1->Width, pictureBox1->Height, height, width);
+	RedrawBoard();
+}

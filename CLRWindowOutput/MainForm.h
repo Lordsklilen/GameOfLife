@@ -25,6 +25,7 @@ namespace CLRWindowOutput {
 		Void pictureBox1_MouseClick(Object^  sender, MouseEventArgs^  e);
 		Void saveGameStateToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e); 
 		Void loadGameStateToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+		Void templateToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 		void InitProgram();
 		void InitVariables();
 		void RedrawBoard();
@@ -55,6 +56,12 @@ namespace CLRWindowOutput {
 	private: System::Windows::Forms::ToolStripMenuItem^  saveGameStateToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  loadGameStateToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  mapTemplatesToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  acornToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  blinkerToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  copperheadToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  diehardToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  gliderToolStripMenuItem;
+	private: System::Windows::Forms::ToolStripMenuItem^  clearWindowToolStripMenuItem;
 
 	public:
 		System::Windows::Forms::Timer^ myTimer;
@@ -70,6 +77,12 @@ namespace CLRWindowOutput {
 			this->saveGameStateToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->loadGameStateToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->mapTemplatesToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->acornToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->blinkerToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->copperheadToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->diehardToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->gliderToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->clearWindowToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
@@ -106,9 +119,9 @@ namespace CLRWindowOutput {
 			// 
 			// menuStrip1
 			// 
-			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(2) {
+			this->menuStrip1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(3) {
 				this->fileToolStripMenuItem,
-					this->mapTemplatesToolStripMenuItem
+					this->mapTemplatesToolStripMenuItem, this->clearWindowToolStripMenuItem
 			});
 			this->menuStrip1->Location = System::Drawing::Point(0, 0);
 			this->menuStrip1->Name = L"menuStrip1";
@@ -129,22 +142,68 @@ namespace CLRWindowOutput {
 			// saveGameStateToolStripMenuItem
 			// 
 			this->saveGameStateToolStripMenuItem->Name = L"saveGameStateToolStripMenuItem";
-			this->saveGameStateToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->saveGameStateToolStripMenuItem->Size = System::Drawing::Size(161, 22);
 			this->saveGameStateToolStripMenuItem->Text = L"Save game state";
 			this->saveGameStateToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::saveGameStateToolStripMenuItem_Click);
 			// 
 			// loadGameStateToolStripMenuItem
 			// 
 			this->loadGameStateToolStripMenuItem->Name = L"loadGameStateToolStripMenuItem";
-			this->loadGameStateToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->loadGameStateToolStripMenuItem->Size = System::Drawing::Size(161, 22);
 			this->loadGameStateToolStripMenuItem->Text = L"Load game state";
 			this->loadGameStateToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::loadGameStateToolStripMenuItem_Click);
 			// 
 			// mapTemplatesToolStripMenuItem
 			// 
+			this->mapTemplatesToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
+				this->acornToolStripMenuItem,
+					this->blinkerToolStripMenuItem, this->copperheadToolStripMenuItem, this->diehardToolStripMenuItem, this->gliderToolStripMenuItem
+			});
 			this->mapTemplatesToolStripMenuItem->Name = L"mapTemplatesToolStripMenuItem";
 			this->mapTemplatesToolStripMenuItem->Size = System::Drawing::Size(98, 20);
 			this->mapTemplatesToolStripMenuItem->Text = L"Map templates";
+			// 
+			// acornToolStripMenuItem
+			// 
+			this->acornToolStripMenuItem->Name = L"acornToolStripMenuItem";
+			this->acornToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->acornToolStripMenuItem->Text = L"Acorn";
+			this->acornToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::templateToolStripMenuItem_Click);
+			// 
+			// blinkerToolStripMenuItem
+			// 
+			this->blinkerToolStripMenuItem->Name = L"blinkerToolStripMenuItem";
+			this->blinkerToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->blinkerToolStripMenuItem->Text = L"Blinker";
+			this->blinkerToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::templateToolStripMenuItem_Click);
+			// 
+			// copperheadToolStripMenuItem
+			// 
+			this->copperheadToolStripMenuItem->Name = L"copperheadToolStripMenuItem";
+			this->copperheadToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->copperheadToolStripMenuItem->Text = L"Copperhead";
+			this->copperheadToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::templateToolStripMenuItem_Click);
+			// 
+			// diehardToolStripMenuItem
+			// 
+			this->diehardToolStripMenuItem->Name = L"diehardToolStripMenuItem";
+			this->diehardToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->diehardToolStripMenuItem->Text = L"Diehard";
+			this->diehardToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::templateToolStripMenuItem_Click);
+			// 
+			// gliderToolStripMenuItem
+			// 
+			this->gliderToolStripMenuItem->Name = L"gliderToolStripMenuItem";
+			this->gliderToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->gliderToolStripMenuItem->Text = L"Glider";
+			this->gliderToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::templateToolStripMenuItem_Click);
+			// 
+			// clearWindowToolStripMenuItem
+			// 
+			this->clearWindowToolStripMenuItem->Name = L"clearWindowToolStripMenuItem";
+			this->clearWindowToolStripMenuItem->Size = System::Drawing::Size(46, 20);
+			this->clearWindowToolStripMenuItem->Text = L"Clear";
+			this->clearWindowToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::templateToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
@@ -166,6 +225,7 @@ namespace CLRWindowOutput {
 
 		}
 #pragma endregion
+
 
 
 };

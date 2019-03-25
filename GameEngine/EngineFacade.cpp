@@ -32,6 +32,17 @@ shared_ptr<RLEstorage> EngineFacade::LoadFile(string path) {
 	this->board->y = storage->y;
 	return storage;
 }
+
+shared_ptr<RLEstorage> EngineFacade::LoadTemplate(string name) {
+	fs::path pathToShow("../Templates/" + name + ".rle");
+	// tutaj pobraæ absolutn¹ scie¿kê :P
+	auto storage = fileManager->LoadFile(fs::absolute(pathToShow).string());
+	this->board->blockBoard = storage->blockBoard;
+	this->board->x = storage->x;
+	this->board->y = storage->y;
+	return storage;
+}
+
 bool EngineFacade::SaveFile(string path) {
 	auto state = CreateGameState(path);
 	return fileManager->SaveFile(state);

@@ -4,6 +4,7 @@
 #include "Board.h"
 #include "RLEHelper.h"
 #include "RLEstorage.h"
+namespace fs = std::experimental::filesystem;
 
 using namespace std;
 class EngineFacade
@@ -17,6 +18,7 @@ public:
 	~EngineFacade();
 	void CreateBoard(int, int);
 	shared_ptr<RLEstorage> LoadFile(string path);
+	shared_ptr<RLEstorage> LoadTemplate(string name);
 	bool SaveFile(string path);
 	void NextIteration();
 	vector<vector<Block>> GetBlockBoard();
