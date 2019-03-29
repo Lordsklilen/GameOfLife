@@ -22,7 +22,9 @@ public:
 
 	int heightSize;
 	int widthSize;
-	DrawingHelper(Graphics^ _g, Brush^ greenB, Brush^ grayB,int _width, int _height, int _heightSize, int _widthSize);
+	void ResetState(int _width, int _height, int _heightSize, int _widthSize);
+	void ResetState(int _heightSize, int _widthSize);
+	DrawingHelper(int _width, int _height, int _heightSize, int _widthSize);
 	void DrawBoard(Graphics^, Brush^, Brush^ ,vector<vector<Block>>);
 	unique_ptr<Position> GetClickedBlockPos(int, int);
 private:

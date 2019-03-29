@@ -44,8 +44,9 @@ void MainForm::InitVariables() {
 	greenBrush = gcnew SolidBrush(Color::Green);
 	grayBrush = gcnew SolidBrush(Color::Gray);
 	myTimer = gcnew System::Windows::Forms::Timer;
-	drawingHelper = gcnew DrawingHelper(graphics, greenBrush, grayBrush, pictureBox1->Width, pictureBox1->Height, height, width);
+	drawingHelper = gcnew DrawingHelper(pictureBox1->Width, pictureBox1->Height, height, width);
 	engine = EngineFacade();
+	ThreadExecute::InitThread(this);
 }
 
 void MainForm::SetConfig(shared_ptr<RLEstorage> storage) {
@@ -64,7 +65,6 @@ void MainForm::RedrawBoard() {
 
 System::Void MainForm::startbtn_Click(Object^  sender, EventArgs^  e) {
 
-	ThreadExecute::InitThread(this);
 	myTimer->Start();
 	startbtn->Enabled = false;
 	stopbtn->Enabled = true;
@@ -117,7 +117,7 @@ Void MainForm::loadGameStateToolStripMenuItem_Click(System::Object^  sender, Sys
 		auto storage = engine.LoadFile(path);
 		width = storage == nullptr ? 50 : storage->y;
 		height = storage == nullptr ? 25 : storage->x;
-		drawingHelper = gcnew DrawingHelper(graphics, greenBrush, grayBrush, pictureBox1->Width, pictureBox1->Height, height, width);
+		drawingHelper->ResetState(height, width);
 		RedrawBoard();
 	}
 }
@@ -129,15 +129,14 @@ Void MainForm::templateToolStripMenuItem_Click(System::Object^  sender, System::
 	auto storage = engine.LoadTemplate(name);
 	width = storage == nullptr ? 50 : storage->y;
 	height = storage == nullptr ? 25 : storage->x;
-	drawingHelper = gcnew DrawingHelper(graphics, greenBrush, grayBrush, pictureBox1->Width, pictureBox1->Height, height, width);
+	drawingHelper->ResetState(height, width);
 	RedrawBoard();
 }
 
 
 
 Void MainForm::NextBtn_Click(Object^  sender, EventArgs^  e) {
-
-	MessageBox::Show("next", "Save state");
+	ThreadExecute::ThreadProc(nullptr,nullptr);
 }
 Void MainForm::PrevBtn_Click(Object^  sender, EventArgs^  e) {
 

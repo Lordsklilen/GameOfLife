@@ -3,7 +3,11 @@
 
 using namespace std;
 
-DrawingHelper::DrawingHelper(Graphics^ _g, Brush^ greenB, Brush^ grayB, int _width, int _height, int _heightSize, int _widthSize)
+DrawingHelper::DrawingHelper(int _width, int _height, int _heightSize, int _widthSize)
+{
+	ResetState(_width, _height, _heightSize, _widthSize);
+}
+void DrawingHelper::ResetState(int _width, int _height, int _heightSize, int _widthSize)
 {
 	width = _width;
 	height = _height;
@@ -12,6 +16,15 @@ DrawingHelper::DrawingHelper(Graphics^ _g, Brush^ greenB, Brush^ grayB, int _wid
 	elHeight = 0;
 	elWidht = 0;
 }
+
+void DrawingHelper::ResetState(int _heightSize, int _widthSize)
+{
+	heightSize = _heightSize;
+	widthSize = _widthSize;
+	elHeight = 0;
+	elWidht = 0;
+}
+
 void DrawingHelper::DrawBoard(Graphics^ _g, Brush^ _gray, Brush^ _green, vector<vector<Block>> blockArray) {
 	elHeight = (height - heightSize) / heightSize;
 	elWidht = (width - widthSize) / widthSize;
@@ -26,12 +39,14 @@ void DrawingHelper::DrawBoard(Graphics^ _g, Brush^ _gray, Brush^ _green, vector<
 		}
 	}
 }
+
 unique_ptr<Position> DrawingHelper::GetPos(Block block) {
 	unique_ptr<Position> pos = std::make_unique<Position>();
 	pos->x = (block.rowHeight * elWidht) + block.rowHeight;
 	pos->y = (block.collumnWidth * elHeight) + block.collumnWidth;
 	return pos;
 }
+
 void DrawingHelper::DrawBlock(Graphics^ _g, Brush^ _b, unique_ptr<Position> &pos) {
 	_g->FillRectangle(
 		_b,
@@ -47,4 +62,5 @@ unique_ptr<Position>  DrawingHelper::GetClickedBlockPos(int x, int y) {
 	pos->x = x / (elWidht + 1);
 	pos->y = y / (elHeight + 1);
 	return pos;
-};;
+};
+void SaveFileAction();
