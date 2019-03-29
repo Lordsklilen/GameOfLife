@@ -4,7 +4,9 @@ using namespace System;
 using namespace System::Windows::Forms;
 using namespace CLRWindowOutput;
 using namespace System::Threading;
+
 EngineFacade  engine;
+
 public ref class ThreadExecute
 {
 public:
@@ -129,4 +131,15 @@ Void MainForm::templateToolStripMenuItem_Click(System::Object^  sender, System::
 	height = storage == nullptr ? 25 : storage->x;
 	drawingHelper = gcnew DrawingHelper(graphics, greenBrush, grayBrush, pictureBox1->Width, pictureBox1->Height, height, width);
 	RedrawBoard();
+}
+
+
+
+Void MainForm::NextBtn_Click(Object^  sender, EventArgs^  e) {
+
+	MessageBox::Show("next", "Save state");
+}
+Void MainForm::PrevBtn_Click(Object^  sender, EventArgs^  e) {
+
+	MessageBox::Show("prev", "Save state");
 }

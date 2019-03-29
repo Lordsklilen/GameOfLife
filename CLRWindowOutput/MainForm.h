@@ -25,6 +25,8 @@ namespace CLRWindowOutput {
 		Void saveGameStateToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e); 
 		Void loadGameStateToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 		Void templateToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+		Void NextBtn_Click(System::Object^  sender, System::EventArgs^  e);
+		Void PrevBtn_Click(System::Object^  sender, System::EventArgs^  e);
 		void InitProgram();
 		void InitVariables();
 		void RedrawBoard();
@@ -61,6 +63,8 @@ namespace CLRWindowOutput {
 	private: System::Windows::Forms::ToolStripMenuItem^  diehardToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  gliderToolStripMenuItem;
 	private: System::Windows::Forms::ToolStripMenuItem^  clearWindowToolStripMenuItem;
+	private: System::Windows::Forms::Button^  button1;
+	private: System::Windows::Forms::Button^  button2;
 
 	public:
 		System::Windows::Forms::Timer^ myTimer;
@@ -82,6 +86,8 @@ namespace CLRWindowOutput {
 			this->diehardToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->gliderToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->clearWindowToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->button2 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
@@ -165,35 +171,35 @@ namespace CLRWindowOutput {
 			// acornToolStripMenuItem
 			// 
 			this->acornToolStripMenuItem->Name = L"acornToolStripMenuItem";
-			this->acornToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->acornToolStripMenuItem->Size = System::Drawing::Size(139, 22);
 			this->acornToolStripMenuItem->Text = L"Acorn";
 			this->acornToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::templateToolStripMenuItem_Click);
 			// 
 			// blinkerToolStripMenuItem
 			// 
 			this->blinkerToolStripMenuItem->Name = L"blinkerToolStripMenuItem";
-			this->blinkerToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->blinkerToolStripMenuItem->Size = System::Drawing::Size(139, 22);
 			this->blinkerToolStripMenuItem->Text = L"Blinker";
 			this->blinkerToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::templateToolStripMenuItem_Click);
 			// 
 			// copperheadToolStripMenuItem
 			// 
 			this->copperheadToolStripMenuItem->Name = L"copperheadToolStripMenuItem";
-			this->copperheadToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->copperheadToolStripMenuItem->Size = System::Drawing::Size(139, 22);
 			this->copperheadToolStripMenuItem->Text = L"Copperhead";
 			this->copperheadToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::templateToolStripMenuItem_Click);
 			// 
 			// diehardToolStripMenuItem
 			// 
 			this->diehardToolStripMenuItem->Name = L"diehardToolStripMenuItem";
-			this->diehardToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->diehardToolStripMenuItem->Size = System::Drawing::Size(139, 22);
 			this->diehardToolStripMenuItem->Text = L"Diehard";
 			this->diehardToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::templateToolStripMenuItem_Click);
 			// 
 			// gliderToolStripMenuItem
 			// 
 			this->gliderToolStripMenuItem->Name = L"gliderToolStripMenuItem";
-			this->gliderToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->gliderToolStripMenuItem->Size = System::Drawing::Size(139, 22);
 			this->gliderToolStripMenuItem->Text = L"Glider";
 			this->gliderToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::templateToolStripMenuItem_Click);
 			// 
@@ -204,11 +210,33 @@ namespace CLRWindowOutput {
 			this->clearWindowToolStripMenuItem->Text = L"Clear";
 			this->clearWindowToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::templateToolStripMenuItem_Click);
 			// 
+			// button1
+			// 
+			this->button1->Location = System::Drawing::Point(174, 27);
+			this->button1->Name = L"button1";
+			this->button1->Size = System::Drawing::Size(118, 23);
+			this->button1->TabIndex = 4;
+			this->button1->Text = L"Next iteration";
+			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &MainForm::NextBtn_Click);
+			// 
+			// button2
+			// 
+			this->button2->Location = System::Drawing::Point(298, 27);
+			this->button2->Name = L"button2";
+			this->button2->Size = System::Drawing::Size(118, 23);
+			this->button2->TabIndex = 5;
+			this->button2->Text = L"Previous iteration";
+			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &MainForm::PrevBtn_Click);
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1073, 582);
+			this->Controls->Add(this->button2);
+			this->Controls->Add(this->button1);
 			this->Controls->Add(this->stopbtn);
 			this->Controls->Add(this->startbtn);
 			this->Controls->Add(this->pictureBox1);
