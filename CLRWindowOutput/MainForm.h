@@ -1,7 +1,6 @@
 #pragma once
 #include "DrawingHelper.h"
 #include "../GameEngine/EngineFacade.h"
-#include "main.h"
 #include <string>
 #include <map>
 using namespace System;
