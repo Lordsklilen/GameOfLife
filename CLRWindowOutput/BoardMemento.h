@@ -1,14 +1,14 @@
 #pragma once
 #include <stack>
-#include "HistoryMemento.h"
+#include "MementoStorage.h"
 #include "../GameEngine/Board.h"
 
 class BoardMemento
 {
-	stack<HistoryMemento> stack;
+	stack<MementoStorage> mementoStack;
 public:
-	void SetState(HistoryMemento board);
-	shared_ptr<Board> GetState();
+	void SetState(MementoStorage memento);
+	shared_ptr<MementoStorage> GetState();
 	BoardMemento();
 	~BoardMemento();
 };

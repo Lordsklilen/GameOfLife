@@ -67,7 +67,7 @@
     <ClCompile Include="BoardMemento.cpp">
       <Filter>Engine\HistoryManager</Filter>
     </ClCompile>
-    <ClCompile Include="HistoryMemento.cpp">
+    <ClCompile Include="MementoStorage.cpp">
       <Filter>Engine\HistoryManager</Filter>
     </ClCompile>
   </ItemGroup>
@@ -99,7 +99,7 @@
     <ClInclude Include="BoardMemento.h">
       <Filter>Engine\HistoryManager</Filter>
     </ClInclude>
-    <ClInclude Include="HistoryMemento.h">
+    <ClInclude Include="MementoStorage.h">
       <Filter>Engine\HistoryManager</Filter>
     </ClInclude>
   </ItemGroup>

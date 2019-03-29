@@ -139,6 +139,6 @@ Void MainForm::NextBtn_Click(Object^  sender, EventArgs^  e) {
 	ThreadExecute::ThreadProc(nullptr,nullptr);
 }
 Void MainForm::PrevBtn_Click(Object^  sender, EventArgs^  e) {
-
-	MessageBox::Show("prev", "Save state");
+	engine.PreviousIteration();
+	RedrawBoard();
 }
