@@ -65,6 +65,7 @@ namespace CLRWindowOutput {
 	private: System::Windows::Forms::ToolStripMenuItem^  clearWindowToolStripMenuItem;
 	private: System::Windows::Forms::Button^  button1;
 	private: System::Windows::Forms::Button^  button2;
+	private: System::Windows::Forms::ToolStripMenuItem^  queenBeeShuttleToolStripMenuItem;
 
 	public:
 		System::Windows::Forms::Timer^ myTimer;
@@ -88,6 +89,7 @@ namespace CLRWindowOutput {
 			this->clearWindowToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
+			this->queenBeeShuttleToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->menuStrip1->SuspendLayout();
 			this->SuspendLayout();
@@ -160,9 +162,10 @@ namespace CLRWindowOutput {
 			// 
 			// mapTemplatesToolStripMenuItem
 			// 
-			this->mapTemplatesToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(5) {
+			this->mapTemplatesToolStripMenuItem->DropDownItems->AddRange(gcnew cli::array< System::Windows::Forms::ToolStripItem^  >(6) {
 				this->acornToolStripMenuItem,
-					this->blinkerToolStripMenuItem, this->copperheadToolStripMenuItem, this->diehardToolStripMenuItem, this->gliderToolStripMenuItem
+					this->blinkerToolStripMenuItem, this->copperheadToolStripMenuItem, this->diehardToolStripMenuItem, this->gliderToolStripMenuItem,
+					this->queenBeeShuttleToolStripMenuItem
 			});
 			this->mapTemplatesToolStripMenuItem->Name = L"mapTemplatesToolStripMenuItem";
 			this->mapTemplatesToolStripMenuItem->Size = System::Drawing::Size(98, 20);
@@ -229,6 +232,13 @@ namespace CLRWindowOutput {
 			this->button2->Text = L"Previous iteration";
 			this->button2->UseVisualStyleBackColor = true;
 			this->button2->Click += gcnew System::EventHandler(this, &MainForm::PrevBtn_Click);
+			// 
+			// queenBeeShuttleToolStripMenuItem
+			// 
+			this->queenBeeShuttleToolStripMenuItem->Name = L"queenBeeShuttleToolStripMenuItem";
+			this->queenBeeShuttleToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->queenBeeShuttleToolStripMenuItem->Text = L"Queen bee shuttle";
+			this->queenBeeShuttleToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::templateToolStripMenuItem_Click);
 			// 
 			// MainForm
 			// 
