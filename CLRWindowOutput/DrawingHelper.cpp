@@ -63,4 +63,3 @@ unique_ptr<Position>  DrawingHelper::GetClickedBlockPos(int x, int y) {
 	pos->y = y / (elHeight + 1);
 	return pos;
 };
-void SaveFileAction();

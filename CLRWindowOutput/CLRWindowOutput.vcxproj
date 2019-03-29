@@ -141,6 +141,9 @@
     <ClCompile Include="..\GameEngine\RLEHelper.cpp" />
     <ClCompile Include="..\GameEngine\RLEstorage.cpp" />
     <ClCompile Include="DrawingHelper.cpp" />
+    <ClCompile Include="BoardMemento.cpp" />
+    <ClCompile Include="HistoryMemento.cpp" />
+    <ClCompile Include="IStorage.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MainForm.cpp" />
   </ItemGroup>
@@ -151,6 +154,9 @@
     <ClInclude Include="..\GameEngine\RLEHelper.h" />
     <ClInclude Include="..\GameEngine\RLEstorage.h" />
     <ClInclude Include="DrawingHelper.h" />
+    <ClInclude Include="BoardMemento.h" />
+    <ClInclude Include="HistoryMemento.h" />
+    <ClInclude Include="IStorage.h" />
     <ClInclude Include="MainForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>

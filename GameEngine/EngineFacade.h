@@ -21,6 +21,8 @@ public:
 	shared_ptr<RLEstorage> LoadTemplate(string name);
 	bool SaveFile(string path);
 	void NextIteration();
+	//TODO 
+	void PreviousIteration();
 	vector<vector<Block>> GetBlockBoard();
 	void SetBlock(int x, int y);
 };

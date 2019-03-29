@@ -31,6 +31,12 @@
     <Filter Include="View\ViewHelpers">
       <UniqueIdentifier>{d35457c7-1ed4-4929-97c2-65bf796a55c2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Storage">
+      <UniqueIdentifier>{5a499c89-0a7a-4aae-be3b-75269b237c70}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\HistoryManager">
+      <UniqueIdentifier>{0ede2bf4-d41f-4470-a77a-0aa68b0f73e3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MainForm.cpp">
@@ -42,9 +48,6 @@
     <ClCompile Include="..\GameEngine\RLEHelper.cpp">
       <Filter>Engine\DAL</Filter>
     </ClCompile>
-    <ClCompile Include="..\GameEngine\RLEstorage.cpp">
-      <Filter>Engine\DataObjects</Filter>
-    </ClCompile>
     <ClCompile Include="..\GameEngine\Block.cpp">
       <Filter>Engine\DataObjects</Filter>
     </ClCompile>
@@ -54,6 +57,18 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="DrawingHelper.cpp">
       <Filter>View\ViewHelpers</Filter>
+    </ClCompile>
+    <ClCompile Include="IStorage.cpp">
+      <Filter>Engine\Storage</Filter>
+    </ClCompile>
+    <ClCompile Include="..\GameEngine\RLEstorage.cpp">
+      <Filter>Engine\Storage</Filter>
+    </ClCompile>
+    <ClCompile Include="BoardMemento.cpp">
+      <Filter>Engine\HistoryManager</Filter>
+    </ClCompile>
+    <ClCompile Include="HistoryMemento.cpp">
+      <Filter>Engine\HistoryManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -66,9 +81,6 @@
     <ClInclude Include="..\GameEngine\RLEHelper.h">
       <Filter>Engine\DAL</Filter>
     </ClInclude>
-    <ClInclude Include="..\GameEngine\RLEstorage.h">
-      <Filter>Engine\DataObjects</Filter>
-    </ClInclude>
     <ClInclude Include="..\GameEngine\Block.h">
       <Filter>Engine\DataObjects</Filter>
     </ClInclude>
@@ -77,6 +89,18 @@
     </ClInclude>
     <ClInclude Include="DrawingHelper.h">
       <Filter>View\ViewHelpers</Filter>
+    </ClInclude>
+    <ClInclude Include="IStorage.h">
+      <Filter>Engine\Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="..\GameEngine\RLEstorage.h">
+      <Filter>Engine\Storage</Filter>
+    </ClInclude>
+    <ClInclude Include="BoardMemento.h">
+      <Filter>Engine\HistoryManager</Filter>
+    </ClInclude>
+    <ClInclude Include="HistoryMemento.h">
+      <Filter>Engine\HistoryManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

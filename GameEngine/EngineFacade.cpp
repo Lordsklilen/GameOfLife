@@ -17,6 +17,9 @@ void EngineFacade::CreateBoard(int x, int y) {
 void EngineFacade::NextIteration() {
 	board->NextIteration();
 }
+void EngineFacade::PreviousIteration() {
+	board->NextIteration();
+}
 vector<vector<Block>> EngineFacade::GetBlockBoard() {
 	return board->blockBoard;
 }
