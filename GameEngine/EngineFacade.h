@@ -16,7 +16,7 @@ private:
 	shared_ptr<Board> board;
 	shared_ptr<RLEHelper> fileManager;
 	shared_ptr<BoardMemento> mementoManager;
-	shared_ptr <RLEstorage> CreateGameState(string path);
+	RLEstorage CreateGameState(string path);
 	void CreateMemento();
 	void RestoreMemento();
 public:

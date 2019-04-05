@@ -13,10 +13,10 @@ class RLEHelper
 {
 
 	int GetNumberOfDigits(int i);
-	string CreateOutputStream(shared_ptr <RLEstorage> storage);
+	string CreateOutputStream(RLEstorage storage);
 public:
-	bool SaveFile(shared_ptr <RLEstorage> storage);
-	shared_ptr <RLEstorage>LoadFile(string path);
+	bool SaveFile(RLEstorage storage);
+	RLEstorage LoadFile(string path);
 	RLEHelper();
 	~RLEHelper();
 };

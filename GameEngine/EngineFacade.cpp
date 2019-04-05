@@ -36,20 +36,20 @@ void EngineFacade::SetBlock(int x, int y) {
 shared_ptr<RLEstorage> EngineFacade::LoadFile(string path) {
 	CreateMemento();
 	auto storage = fileManager->LoadFile(path);
-	this->board->blockBoard = storage->blockBoard;
-	this->board->x = storage->x;
-	this->board->y = storage->y;
-	return storage;
+	this->board->blockBoard = storage.blockBoard;
+	this->board->x = storage.x;
+	this->board->y = storage.y;
+	return make_shared<RLEstorage>(storage);
 }
 
 shared_ptr<RLEstorage> EngineFacade::LoadTemplate(string name) {
 	CreateMemento();
 	fs::path pathToShow("../Templates/" + name + ".rle");
 	auto storage = fileManager->LoadFile(fs::absolute(pathToShow).string());
-	this->board->blockBoard = storage->blockBoard;
-	this->board->x = storage->x;
-	this->board->y = storage->y;
-	return storage;
+	this->board->blockBoard = storage.blockBoard;
+	this->board->x = storage.x;
+	this->board->y = storage.y;
+	return make_shared<RLEstorage>(storage);
 }
 
 bool EngineFacade::SaveFile(string path) {
@@ -57,20 +57,20 @@ bool EngineFacade::SaveFile(string path) {
 	return fileManager->SaveFile(state);
 }
 
-shared_ptr<RLEstorage> EngineFacade::CreateGameState(string path) {
+RLEstorage EngineFacade::CreateGameState(string path) {
 	CreateMemento();
-	shared_ptr<RLEstorage> state = make_shared<RLEstorage>();
-	state->blockBoard = this->board->blockBoard;
-	state->path = path;
-	state->x = this->board->x;
-	state->y = this->board->y;
-	return state;
+	RLEstorage state = RLEstorage();
+	state.blockBoard = this->board->blockBoard;
+	state.path = path;
+	state.x = this->board->x;
+	state.y = this->board->y;
+	return move(state);
 }
 
 void EngineFacade::CreateMemento() {
 	MementoStorage mem;
 	mem.blockBoard = GetBlockBoard();
-	mementoManager->SetState(mem);
+	mementoManager->SetState(move(mem));
 }
 
 void EngineFacade::RestoreMemento() {
