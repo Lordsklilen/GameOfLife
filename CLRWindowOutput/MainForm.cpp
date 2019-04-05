@@ -4,40 +4,72 @@ using namespace System;
 using namespace System::Windows::Forms;
 using namespace CLRWindowOutput;
 using namespace System::Threading;
+using namespace System::Diagnostics;
 
 EngineFacade  engine;
 
 public ref class ThreadExecute
 {
-public:
+	static bool done = true;
+	static int fps_counter = 0;
+	static int fps_per_second = 0;
+	static double currentFps = 0;
 	static PictureBox^ pictureBox1;
 	static Brush^ grayBrush;
+	static Brush^ blackBrush;
 	static Brush^ greenBrush;
 	static DrawingHelper^ drawingHelper;
+	static Stopwatch^ stopWatch;
+	static TimeSpan^ lastTimespan;
+public:
 	static void ThreadExecute::InitThread(MainForm^ form) {
 		pictureBox1 = form->pictureBox1;
 		grayBrush = form->grayBrush;
 		greenBrush = form->greenBrush;
 		drawingHelper = form->drawingHelper;
+		blackBrush = gcnew SolidBrush(Color::Black);
+		stopWatch = gcnew Stopwatch();
+		stopWatch->Start();
 	}
+
 	static void ThreadExecute::ThreadProc(Object^, EventArgs^)
 	{
-		auto bitmap = gcnew Bitmap(pictureBox1->Width, pictureBox1->Height);
-		auto g = Graphics::FromImage((Image^)bitmap);
+		if (done) {
+			done = false;
+			auto bitmap = gcnew Bitmap(pictureBox1->Width, pictureBox1->Height);
+			auto g = Graphics::FromImage((Image^)bitmap);
 
-		engine.NextIteration();
-		drawingHelper->DrawBoard(g, grayBrush, greenBrush, engine.GetBlockBoard());
-		pictureBox1->Image = (Image^)bitmap;
+			engine.NextIteration();
+			drawingHelper->DrawBoard(g, grayBrush, greenBrush, engine.GetBlockBoard());
+
+			drawingHelper->DrawCounter(g, blackBrush, CountFps());
+			pictureBox1->Image = (Image^)bitmap;
+			done = true;
+		}
+	}
+
+	static int CountFps() {
+		auto currenttime = stopWatch->ElapsedMilliseconds;
+		if (currenttime > 1000) {
+			fps_counter++;
+			stopWatch->Stop();
+			currentFps = fps_counter+1;
+			stopWatch->Reset();
+			fps_counter = 0;
+			stopWatch->Start();
+		}
+		else
+			fps_counter++;
+		return currentFps;
 	}
 };
 
 void MainForm::InitProgram() {
 	engine.CreateBoard(drawingHelper->heightSize, drawingHelper->widthSize);
 	myTimer->Tick += gcnew EventHandler(ThreadExecute::ThreadProc);
-	myTimer->Interval = 250;
+	myTimer->Interval = 5;
 	RedrawBoard();
 }
-
 
 void MainForm::InitVariables() {
 	graphics = pictureBox1->CreateGraphics();
@@ -63,7 +95,7 @@ void MainForm::RedrawBoard() {
 	pictureBox1->Image = (Image^)bitmap;
 }
 
-System::Void MainForm::startbtn_Click(Object^  sender, EventArgs^  e) {
+Void MainForm::startbtn_Click(Object^  sender, EventArgs^  e) {
 
 	myTimer->Start();
 	startbtn->Enabled = false;
@@ -133,11 +165,10 @@ Void MainForm::templateToolStripMenuItem_Click(System::Object^  sender, System::
 	RedrawBoard();
 }
 
-
-
 Void MainForm::NextBtn_Click(Object^  sender, EventArgs^  e) {
 	ThreadExecute::ThreadProc(nullptr,nullptr);
 }
+
 Void MainForm::PrevBtn_Click(Object^  sender, EventArgs^  e) {
 	engine.PreviousIteration();
 	RedrawBoard();

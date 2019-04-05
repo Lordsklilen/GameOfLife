@@ -6,6 +6,8 @@ using namespace std;
 DrawingHelper::DrawingHelper(int _width, int _height, int _heightSize, int _widthSize)
 {
 	ResetState(_width, _height, _heightSize, _widthSize);
+	font = gcnew Font("Arial", 16);
+	drawFormat = gcnew StringFormat();
 }
 void DrawingHelper::ResetState(int _width, int _height, int _heightSize, int _widthSize)
 {
@@ -39,7 +41,9 @@ void DrawingHelper::DrawBoard(Graphics^ _g, Brush^ _gray, Brush^ _green, vector<
 		}
 	}
 }
-
+void DrawingHelper::DrawCounter(Graphics^ _g, Brush^ brush, int number) {
+	_g->DrawString(number.ToString(), font, brush, width-50,0, drawFormat);
+}
 unique_ptr<Position> DrawingHelper::GetPos(Block block) {
 	unique_ptr<Position> pos = std::make_unique<Position>();
 	pos->x = (block.rowHeight * elWidht) + block.rowHeight;
