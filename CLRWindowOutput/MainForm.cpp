@@ -124,6 +124,8 @@ Void MainForm::stopbtn_Click(Object^  sender, EventArgs^  e) {
 Void MainForm::pictureBox1_MouseClick(Object^  sender, MouseEventArgs^  e) {
 
 	auto pos = drawingHelper->GetClickedBlockPos(e->Location.X, e->Location.Y);
+	if (pos->x >= width || pos->y >= height)
+		return;
 	engine.SetBlock(pos->y, pos->x);
 	RedrawBoard();
 };
