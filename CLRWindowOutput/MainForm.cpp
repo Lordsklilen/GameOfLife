@@ -12,16 +12,18 @@ public ref class ThreadExecute
 {
 	static bool done = true;
 	static int fps_counter = 0;
-	static int fps_per_second = 0;
-	static double currentFps = 0;
+	static int currentFps = 0;
 	static PictureBox^ pictureBox1;
 	static Brush^ grayBrush;
 	static Brush^ blackBrush;
 	static Brush^ greenBrush;
 	static DrawingHelper^ drawingHelper;
 	static Stopwatch^ stopWatch;
-	static TimeSpan^ lastTimespan;
+	static long lastTimespan;
+	static Object^ thisLock;
+
 public:
+
 	static void ThreadExecute::InitThread(MainForm^ form) {
 		pictureBox1 = form->pictureBox1;
 		grayBrush = form->grayBrush;
@@ -29,13 +31,15 @@ public:
 		drawingHelper = form->drawingHelper;
 		blackBrush = gcnew SolidBrush(Color::Black);
 		stopWatch = gcnew Stopwatch();
+		thisLock = gcnew Object();
 		stopWatch->Start();
 	}
 
 	static void ThreadExecute::ThreadProc(Object^, EventArgs^)
 	{
-		if (done) {
-			done = false;
+		Monitor::Enter(thisLock);
+		try
+		{
 			auto bitmap = gcnew Bitmap(pictureBox1->Width, pictureBox1->Height);
 			auto g = Graphics::FromImage((Image^)bitmap);
 
@@ -44,16 +48,20 @@ public:
 
 			drawingHelper->DrawCounter(g, blackBrush, CountFps());
 			pictureBox1->Image = (Image^)bitmap;
-			done = true;
+		}
+		finally
+		{
+			Monitor::Exit(thisLock);
 		}
 	}
 
 	static int CountFps() {
-		auto currenttime = stopWatch->ElapsedMilliseconds;
-		if (currenttime > 1000) {
+		auto currenttime = stopWatch->ElapsedMilliseconds + lastTimespan;
+		if (currenttime >= 1000) {
 			fps_counter++;
 			stopWatch->Stop();
-			currentFps = fps_counter+1;
+			lastTimespan = currenttime - 1000;
+			currentFps = fps_counter;
 			stopWatch->Reset();
 			fps_counter = 0;
 			stopWatch->Start();
@@ -65,9 +73,12 @@ public:
 };
 
 void MainForm::InitProgram() {
+
+	Maxmilisecond = 1000;
 	engine.CreateBoard(drawingHelper->heightSize, drawingHelper->widthSize);
 	myTimer->Tick += gcnew EventHandler(ThreadExecute::ThreadProc);
-	myTimer->Interval = 5;
+	int fps = Maxmilisecond / (int)numericUpDown1->Value;
+	myTimer->Interval = fps;
 	RedrawBoard();
 }
 
@@ -82,8 +93,8 @@ void MainForm::InitVariables() {
 }
 
 void MainForm::SetConfig(shared_ptr<RLEstorage> storage) {
-	width = storage==nullptr? 50: storage->y;
-	height = storage == nullptr? 25 : storage->x;
+	width = storage == nullptr ? 50 : storage->y;
+	height = storage == nullptr ? 25 : storage->x;
 	InitVariables();
 	InitProgram();
 }
@@ -100,12 +111,14 @@ Void MainForm::startbtn_Click(Object^  sender, EventArgs^  e) {
 	myTimer->Start();
 	startbtn->Enabled = false;
 	stopbtn->Enabled = true;
+	numericUpDown1->Enabled = false;
 };
 
 Void MainForm::stopbtn_Click(Object^  sender, EventArgs^  e) {
 	myTimer->Stop();
 	startbtn->Enabled = true;
 	stopbtn->Enabled = false;
+	numericUpDown1->Enabled = true;
 };
 
 Void MainForm::pictureBox1_MouseClick(Object^  sender, MouseEventArgs^  e) {
@@ -123,7 +136,7 @@ void MarshalString(String ^ s, string& os) {
 	Marshal::FreeHGlobal(IntPtr((void*)chars));
 }
 
-Void MainForm::saveGameStateToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+Void MainForm::saveGameStateToolStripMenuItem_Click(Object^  sender, EventArgs^  e) {
 	SaveFileDialog^ sfd = gcnew SaveFileDialog();
 	string path = "";
 	sfd->Filter = "Pliki RLE (*.rle)|*.rle|Wszystkie pliki (*.*)|*.*";
@@ -139,7 +152,7 @@ Void MainForm::saveGameStateToolStripMenuItem_Click(System::Object^  sender, Sys
 	}
 }
 
-Void MainForm::loadGameStateToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+Void MainForm::loadGameStateToolStripMenuItem_Click(Object^  sender, EventArgs^  e) {
 	OpenFileDialog ^ sfd = gcnew OpenFileDialog();
 	string path = "";
 	sfd->Filter = "Pliki RLE (*.rle)|*.rle|Wszystkie pliki (*.*)|*.*";
@@ -154,7 +167,7 @@ Void MainForm::loadGameStateToolStripMenuItem_Click(System::Object^  sender, Sys
 	}
 }
 
-Void MainForm::templateToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e) {
+Void MainForm::templateToolStripMenuItem_Click(Object^  sender, EventArgs^  e) {
 	auto senderText = ((ToolStripMenuItem^)sender);
 	string name;
 	MarshalString(senderText->Text, name);
@@ -166,10 +179,15 @@ Void MainForm::templateToolStripMenuItem_Click(System::Object^  sender, System::
 }
 
 Void MainForm::NextBtn_Click(Object^  sender, EventArgs^  e) {
-	ThreadExecute::ThreadProc(nullptr,nullptr);
+	ThreadExecute::ThreadProc(nullptr, nullptr);
 }
 
 Void MainForm::PrevBtn_Click(Object^  sender, EventArgs^  e) {
 	engine.PreviousIteration();
 	RedrawBoard();
+}
+
+Void MainForm::numericUpDown1_ValueChanged(Object^  sender, EventArgs^  e) {
+	int fps = Maxmilisecond /(int)numericUpDown1->Value;
+	myTimer->Interval = fps;
 }

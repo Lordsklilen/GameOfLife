@@ -7,6 +7,7 @@ EngineFacade::EngineFacade() {
 	this->fileManager = make_shared<RLEHelper>();
 	this->mementoManager = make_shared<BoardMemento>();
 }
+
 EngineFacade::~EngineFacade() {}
 
 void EngineFacade::CreateBoard(int x, int y) {
