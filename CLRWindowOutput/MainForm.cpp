@@ -43,13 +43,10 @@ public:
 		try
 		{
 			System::Drawing::Bitmap^ bitmap = gcnew Bitmap(pictureBox1->Image);
-			//auto bitmap = gcnew Bitmap(pictureBox1->Width, pictureBox1->Height);
 			auto g = Graphics::FromImage((Image^)bitmap);
 			auto previous = engine.GetBlockBoard();
 			engine.NextIteration();
 			drawingHelper->DrawBoardOptymalized(g, grayBrush, greenBrush, engine.GetBlockBoard(), previous);
-
-			//drawingHelper->DrawCounter(g, blackBrush, CountFps());
 			FPS_number->Text = "FPS: " + CountFps().ToString();
 			pictureBox1->Image = (Image^)bitmap;
 		}
@@ -77,13 +74,14 @@ public:
 };
 
 void MainForm::InitProgram() {
+	Maxmilisecond = 1000;
+	myTimer->Tick += gcnew EventHandler(ThreadExecute::ThreadProc);
 	ClearForm(false);
 }
 
 void MainForm::ClearForm(bool clear) {
-	Maxmilisecond = 1000;
+	stopbtn_Click(nullptr, nullptr);
 	engine.CreateBoard(drawingHelper->heightSize, drawingHelper->widthSize,clear);
-	myTimer->Tick += gcnew EventHandler(ThreadExecute::ThreadProc);
 	myTimer->Interval = Maxmilisecond / (int)numericUpDown1->Value;
 	RedrawBoard();
 
@@ -117,6 +115,7 @@ void MainForm::RedrawBoard() {
 
 Void MainForm::startbtn_Click(Object^  sender, EventArgs^  e) {
 
+	ThreadExecute::InitThread(this);
 	myTimer->Start();
 	startbtn->Enabled = false;
 	stopbtn->Enabled = true;
@@ -164,6 +163,7 @@ Void MainForm::saveGameStateToolStripMenuItem_Click(Object^  sender, EventArgs^ 
 }
 
 Void MainForm::loadGameStateToolStripMenuItem_Click(Object^  sender, EventArgs^  e) {
+	stopbtn_Click(nullptr, nullptr);
 	OpenFileDialog ^ sfd = gcnew OpenFileDialog();
 	string path = "";
 	sfd->Filter = "Pliki RLE (*.rle)|*.rle|Wszystkie pliki (*.*)|*.*";
@@ -173,6 +173,10 @@ Void MainForm::loadGameStateToolStripMenuItem_Click(Object^  sender, EventArgs^ 
 		auto storage = engine.LoadFile(path);
 		width = storage == nullptr ? 50 : storage->y;
 		height = storage == nullptr ? 25 : storage->x;
+		if (storage != nullptr) {
+			X_numericUpDown2->Value = storage->y;
+			Y_numericUpDown2->Value = storage->x;
+		}
 		drawingHelper->ResetState(height, width);
 		RedrawBoard();
 	}
