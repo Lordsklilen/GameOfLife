@@ -28,11 +28,20 @@ namespace CLRWindowOutput {
 		Void NextBtn_Click(System::Object^  sender, System::EventArgs^  e);
 		Void PrevBtn_Click(System::Object^  sender, System::EventArgs^  e);
 		Void numericUpDown1_ValueChanged(System::Object^  sender, System::EventArgs^  e);
+		Void newGame_btn_Click(System::Object^  sender, System::EventArgs^  e);
 		void InitProgram();
 		void InitVariables();
 		void RedrawBoard();
 		void SetConfig(shared_ptr<RLEstorage> storage);
+
 	private: System::Windows::Forms::ToolStripMenuItem^  gosperGliderGunToolStripMenuItem;
+	public: System::Windows::Forms::Button^  newGame_btn;
+	private:
+	private: System::Windows::Forms::NumericUpDown^  X_numericUpDown2;
+	public:
+	private: System::Windows::Forms::Label^  label2;
+	private: System::Windows::Forms::Label^  label3;
+	private: System::Windows::Forms::NumericUpDown^  Y_numericUpDown2;
 	public:
 		int Maxmilisecond;
 	protected:
@@ -93,15 +102,22 @@ namespace CLRWindowOutput {
 			this->diehardToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->gliderToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->queenBeeShuttleToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->gosperGliderGunToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->clearWindowToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->numericUpDown1 = (gcnew System::Windows::Forms::NumericUpDown());
-			this->gosperGliderGunToolStripMenuItem = (gcnew System::Windows::Forms::ToolStripMenuItem());
+			this->newGame_btn = (gcnew System::Windows::Forms::Button());
+			this->X_numericUpDown2 = (gcnew System::Windows::Forms::NumericUpDown());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->label3 = (gcnew System::Windows::Forms::Label());
+			this->Y_numericUpDown2 = (gcnew System::Windows::Forms::NumericUpDown());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->menuStrip1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->X_numericUpDown2))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Y_numericUpDown2))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// pictureBox1
@@ -159,14 +175,14 @@ namespace CLRWindowOutput {
 			// saveGameStateToolStripMenuItem
 			// 
 			this->saveGameStateToolStripMenuItem->Name = L"saveGameStateToolStripMenuItem";
-			this->saveGameStateToolStripMenuItem->Size = System::Drawing::Size(161, 22);
+			this->saveGameStateToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->saveGameStateToolStripMenuItem->Text = L"Save game state";
 			this->saveGameStateToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::saveGameStateToolStripMenuItem_Click);
 			// 
 			// loadGameStateToolStripMenuItem
 			// 
 			this->loadGameStateToolStripMenuItem->Name = L"loadGameStateToolStripMenuItem";
-			this->loadGameStateToolStripMenuItem->Size = System::Drawing::Size(161, 22);
+			this->loadGameStateToolStripMenuItem->Size = System::Drawing::Size(180, 22);
 			this->loadGameStateToolStripMenuItem->Text = L"Load game state";
 			this->loadGameStateToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::loadGameStateToolStripMenuItem_Click);
 			// 
@@ -184,44 +200,51 @@ namespace CLRWindowOutput {
 			// acornToolStripMenuItem
 			// 
 			this->acornToolStripMenuItem->Name = L"acornToolStripMenuItem";
-			this->acornToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->acornToolStripMenuItem->Size = System::Drawing::Size(170, 22);
 			this->acornToolStripMenuItem->Text = L"Acorn";
 			this->acornToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::templateToolStripMenuItem_Click);
 			// 
 			// blinkerToolStripMenuItem
 			// 
 			this->blinkerToolStripMenuItem->Name = L"blinkerToolStripMenuItem";
-			this->blinkerToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->blinkerToolStripMenuItem->Size = System::Drawing::Size(170, 22);
 			this->blinkerToolStripMenuItem->Text = L"Blinker";
 			this->blinkerToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::templateToolStripMenuItem_Click);
 			// 
 			// copperheadToolStripMenuItem
 			// 
 			this->copperheadToolStripMenuItem->Name = L"copperheadToolStripMenuItem";
-			this->copperheadToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->copperheadToolStripMenuItem->Size = System::Drawing::Size(170, 22);
 			this->copperheadToolStripMenuItem->Text = L"Copperhead";
 			this->copperheadToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::templateToolStripMenuItem_Click);
 			// 
 			// diehardToolStripMenuItem
 			// 
 			this->diehardToolStripMenuItem->Name = L"diehardToolStripMenuItem";
-			this->diehardToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->diehardToolStripMenuItem->Size = System::Drawing::Size(170, 22);
 			this->diehardToolStripMenuItem->Text = L"Diehard";
 			this->diehardToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::templateToolStripMenuItem_Click);
 			// 
 			// gliderToolStripMenuItem
 			// 
 			this->gliderToolStripMenuItem->Name = L"gliderToolStripMenuItem";
-			this->gliderToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->gliderToolStripMenuItem->Size = System::Drawing::Size(170, 22);
 			this->gliderToolStripMenuItem->Text = L"Glider";
 			this->gliderToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::templateToolStripMenuItem_Click);
 			// 
 			// queenBeeShuttleToolStripMenuItem
 			// 
 			this->queenBeeShuttleToolStripMenuItem->Name = L"queenBeeShuttleToolStripMenuItem";
-			this->queenBeeShuttleToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->queenBeeShuttleToolStripMenuItem->Size = System::Drawing::Size(170, 22);
 			this->queenBeeShuttleToolStripMenuItem->Text = L"Queen bee shuttle";
 			this->queenBeeShuttleToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::templateToolStripMenuItem_Click);
+			// 
+			// gosperGliderGunToolStripMenuItem
+			// 
+			this->gosperGliderGunToolStripMenuItem->Name = L"gosperGliderGunToolStripMenuItem";
+			this->gosperGliderGunToolStripMenuItem->Size = System::Drawing::Size(170, 22);
+			this->gosperGliderGunToolStripMenuItem->Text = L"Gosper Glider Gun";
+			this->gosperGliderGunToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::templateToolStripMenuItem_Click);
 			// 
 			// clearWindowToolStripMenuItem
 			// 
@@ -269,18 +292,62 @@ namespace CLRWindowOutput {
 			this->numericUpDown1->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 4, 0, 0, 0 });
 			this->numericUpDown1->ValueChanged += gcnew System::EventHandler(this, &MainForm::numericUpDown1_ValueChanged);
 			// 
-			// gosperGliderGunToolStripMenuItem
+			// newGame_btn
 			// 
-			this->gosperGliderGunToolStripMenuItem->Name = L"gosperGliderGunToolStripMenuItem";
-			this->gosperGliderGunToolStripMenuItem->Size = System::Drawing::Size(180, 22);
-			this->gosperGliderGunToolStripMenuItem->Text = L"Gosper Glider Gun";
-			this->gosperGliderGunToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::templateToolStripMenuItem_Click);
+			this->newGame_btn->Location = System::Drawing::Point(444, 27);
+			this->newGame_btn->Name = L"newGame_btn";
+			this->newGame_btn->Size = System::Drawing::Size(75, 23);
+			this->newGame_btn->TabIndex = 9;
+			this->newGame_btn->Text = L"New Game";
+			this->newGame_btn->UseVisualStyleBackColor = true;
+			this->newGame_btn->Click += gcnew System::EventHandler(this, &MainForm::newGame_btn_Click);
+			// 
+			// X_numericUpDown2
+			// 
+			this->X_numericUpDown2->Location = System::Drawing::Point(548, 30);
+			this->X_numericUpDown2->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
+			this->X_numericUpDown2->Name = L"X_numericUpDown2";
+			this->X_numericUpDown2->Size = System::Drawing::Size(53, 20);
+			this->X_numericUpDown2->TabIndex = 10;
+			this->X_numericUpDown2->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 50, 0, 0, 0 });
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(525, 32);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(17, 13);
+			this->label2->TabIndex = 12;
+			this->label2->Text = L"X:";
+			// 
+			// label3
+			// 
+			this->label3->AutoSize = true;
+			this->label3->Location = System::Drawing::Point(610, 32);
+			this->label3->Name = L"label3";
+			this->label3->Size = System::Drawing::Size(17, 13);
+			this->label3->TabIndex = 14;
+			this->label3->Text = L"Y:";
+			// 
+			// Y_numericUpDown2
+			// 
+			this->Y_numericUpDown2->Location = System::Drawing::Point(633, 30);
+			this->Y_numericUpDown2->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
+			this->Y_numericUpDown2->Name = L"Y_numericUpDown2";
+			this->Y_numericUpDown2->Size = System::Drawing::Size(53, 20);
+			this->Y_numericUpDown2->TabIndex = 13;
+			this->Y_numericUpDown2->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 25, 0, 0, 0 });
 			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1073, 582);
+			this->Controls->Add(this->label3);
+			this->Controls->Add(this->Y_numericUpDown2);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->X_numericUpDown2);
+			this->Controls->Add(this->newGame_btn);
 			this->Controls->Add(this->numericUpDown1);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->button2);
@@ -296,6 +363,8 @@ namespace CLRWindowOutput {
 			this->menuStrip1->ResumeLayout(false);
 			this->menuStrip1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->X_numericUpDown2))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Y_numericUpDown2))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 

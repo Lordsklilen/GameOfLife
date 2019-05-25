@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="RLEHelper">
+    <Position X="10" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAQAAAAAAAAAAQAAAABAgAAAAABAA=</HashCode>
+      <FileName>C:\Users\Dela_\source\repos\GameOfLife\GameEngine\RLEHelper.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Block">
+    <Position X="10" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAECAAAAAAABAAAAAAAAAAQAAAAAAAAAAAAAAEAAAE=</HashCode>
+      <FileName>C:\Users\Dela_\source\repos\GameOfLife\GameEngine\Block.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Board">
+    <Position X="12" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAEGQBAAAAAAAAAAAAAAAAAAAAAABgACAACAA=</HashCode>
+      <FileName>C:\Users\Dela_\source\repos\GameOfLife\GameEngine\Board.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EngineFacade">
+    <Position X="8.25" Y="1.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAQAAAACQAAAIkBAAAAAAAAppgAAAEAABAA=</HashCode>
+      <FileName>C:\Users\Dela_\source\repos\GameOfLife\GameEngine\EngineFacade.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BoardMemento">
+    <Position X="12" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAABEAAAgAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>BoardMemento.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MementoStorage">
+    <Position X="1.25" Y="3.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAA=</HashCode>
+      <FileName>MementoStorage.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IStorage">
+    <Position X="2.5" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAgAA=</HashCode>
+      <FileName>IStorage.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RLEstorage">
+    <Position X="3.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAACAAAAAAAAAAAAAABgAAAAAAA=</HashCode>
+      <FileName>C:\Users\Dela_\source\repos\GameOfLife\GameEngine\RLEstorage.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

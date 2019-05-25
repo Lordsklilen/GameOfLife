@@ -93,8 +93,10 @@ void MainForm::InitVariables() {
 }
 
 void MainForm::SetConfig(shared_ptr<RLEstorage> storage) {
-	width = storage == nullptr ? 50 : storage->y;
-	height = storage == nullptr ? 25 : storage->x;
+	int x = (int)X_numericUpDown2->Value;
+	int y = (int)Y_numericUpDown2->Value;
+	width = storage == nullptr ? x : storage->y;
+	height = storage == nullptr ? y : storage->x;
 	InitVariables();
 	InitProgram();
 }
@@ -192,4 +194,8 @@ Void MainForm::PrevBtn_Click(Object^  sender, EventArgs^  e) {
 Void MainForm::numericUpDown1_ValueChanged(Object^  sender, EventArgs^  e) {
 	int fps = Maxmilisecond /(int)numericUpDown1->Value;
 	myTimer->Interval = fps;
+}
+
+Void MainForm::newGame_btn_Click(System::Object^  sender, System::EventArgs^  e) {
+	SetConfig(nullptr);
 }
