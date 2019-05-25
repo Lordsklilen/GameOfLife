@@ -1,4 +1,5 @@
 #pragma once
+#include <omp.h>
 class Block
 {
 public:

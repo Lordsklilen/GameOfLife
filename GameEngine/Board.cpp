@@ -1,9 +1,7 @@
 #include "Board.h"
-
-
-
 Board::Board(int width, int height)
 {
+	omp_set_num_threads(4);
 	this->x = width;
 	this->y = height;
 	vector<vector<Block> > blockBoard(
@@ -23,6 +21,8 @@ Board::Board(int width, int height)
 }
 void Board::NextIteration() {
 	copyBlockBoard = this->blockBoard;
+
+	#pragma omp parallel for
 	for (int i = 0; i < x; i++)
 	{
 		for (int j = 0; j < y; j++)
