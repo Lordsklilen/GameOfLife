@@ -10,9 +10,12 @@ EngineFacade::EngineFacade() {
 
 EngineFacade::~EngineFacade() {}
 
-void EngineFacade::CreateBoard(int x, int y) {
+void EngineFacade::CreateBoard(int x, int y, bool memento) {
+	if(memento)
+		CreateMemento();
 	this->board = make_shared<Board>(x, y);
-	CreateMemento();
+	if (!memento)
+		CreateMemento();
 }
 
 void EngineFacade::NextIteration() {
@@ -68,9 +71,12 @@ RLEstorage EngineFacade::CreateGameState(string path) {
 }
 
 void EngineFacade::CreateMemento() {
-	MementoStorage mem;
-	mem.blockBoard = GetBlockBoard();
-	mementoManager->SetState(move(mem));
+	vector<vector<Block>> b = GetBlockBoard();
+	if (!b.empty()) {
+		MementoStorage mem;
+		mem.blockBoard = b;
+		mementoManager->SetState(move(mem));
+	}
 }
 
 void EngineFacade::RestoreMemento() {

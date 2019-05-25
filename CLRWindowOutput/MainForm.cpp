@@ -73,13 +73,16 @@ public:
 };
 
 void MainForm::InitProgram() {
+	ClearForm(false);
+}
 
+void MainForm::ClearForm(bool clear) {
 	Maxmilisecond = 1000;
-	engine.CreateBoard(drawingHelper->heightSize, drawingHelper->widthSize);
+	engine.CreateBoard(drawingHelper->heightSize, drawingHelper->widthSize,clear);
 	myTimer->Tick += gcnew EventHandler(ThreadExecute::ThreadProc);
-	int fps = Maxmilisecond / (int)numericUpDown1->Value;
-	myTimer->Interval = fps;
+	myTimer->Interval = Maxmilisecond / (int)numericUpDown1->Value;
 	RedrawBoard();
+
 }
 
 void MainForm::InitVariables() {
@@ -198,4 +201,7 @@ Void MainForm::numericUpDown1_ValueChanged(Object^  sender, EventArgs^  e) {
 
 Void MainForm::newGame_btn_Click(System::Object^  sender, System::EventArgs^  e) {
 	SetConfig(nullptr);
+}
+Void MainForm::clear_btn_Click(System::Object^  sender, System::EventArgs^  e) {
+	ClearForm(true);
 }

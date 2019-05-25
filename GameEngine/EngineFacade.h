@@ -22,7 +22,7 @@ private:
 public:
 	EngineFacade();
 	~EngineFacade();
-	void CreateBoard(int, int);
+	void CreateBoard(int, int,bool memento);
 	shared_ptr<RLEstorage> LoadFile(string path);
 	shared_ptr<RLEstorage> LoadTemplate(string name);
 	bool SaveFile(string path);

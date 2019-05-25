@@ -25,6 +25,7 @@ namespace CLRWindowOutput {
 		Void saveGameStateToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e); 
 		Void loadGameStateToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
 		Void templateToolStripMenuItem_Click(System::Object^  sender, System::EventArgs^  e);
+		Void clear_btn_Click(System::Object^  sender, System::EventArgs^  e);
 		Void NextBtn_Click(System::Object^  sender, System::EventArgs^  e);
 		Void PrevBtn_Click(System::Object^  sender, System::EventArgs^  e);
 		Void numericUpDown1_ValueChanged(System::Object^  sender, System::EventArgs^  e);
@@ -32,6 +33,7 @@ namespace CLRWindowOutput {
 		void InitProgram();
 		void InitVariables();
 		void RedrawBoard();
+		void MainForm::ClearForm(bool memento);
 		void SetConfig(shared_ptr<RLEstorage> storage);
 
 	private: System::Windows::Forms::ToolStripMenuItem^  gosperGliderGunToolStripMenuItem;
@@ -251,7 +253,7 @@ namespace CLRWindowOutput {
 			this->clearWindowToolStripMenuItem->Name = L"clearWindowToolStripMenuItem";
 			this->clearWindowToolStripMenuItem->Size = System::Drawing::Size(46, 20);
 			this->clearWindowToolStripMenuItem->Text = L"Clear";
-			this->clearWindowToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::templateToolStripMenuItem_Click);
+			this->clearWindowToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::clear_btn_Click);
 			// 
 			// button1
 			// 
