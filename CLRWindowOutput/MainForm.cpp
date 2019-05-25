@@ -21,11 +21,13 @@ public ref class ThreadExecute
 	static Stopwatch^ stopWatch;
 	static long lastTimespan;
 	static Object^ thisLock;
+	static Label ^FPS_number;
 
 public:
 
 	static void ThreadExecute::InitThread(MainForm^ form) {
 		pictureBox1 = form->pictureBox1;
+		FPS_number = form->FPS_number;
 		grayBrush = form->grayBrush;
 		greenBrush = form->greenBrush;
 		drawingHelper = form->drawingHelper;
@@ -40,13 +42,15 @@ public:
 		Monitor::Enter(thisLock);
 		try
 		{
-			auto bitmap = gcnew Bitmap(pictureBox1->Width, pictureBox1->Height);
+			System::Drawing::Bitmap^ bitmap = gcnew Bitmap(pictureBox1->Image);
+			//auto bitmap = gcnew Bitmap(pictureBox1->Width, pictureBox1->Height);
 			auto g = Graphics::FromImage((Image^)bitmap);
-
+			auto previous = engine.GetBlockBoard();
 			engine.NextIteration();
-			drawingHelper->DrawBoard(g, grayBrush, greenBrush, engine.GetBlockBoard());
+			drawingHelper->DrawBoardOptymalized(g, grayBrush, greenBrush, engine.GetBlockBoard(), previous);
 
-			drawingHelper->DrawCounter(g, blackBrush, CountFps());
+			//drawingHelper->DrawCounter(g, blackBrush, CountFps());
+			FPS_number->Text = "FPS: " + CountFps().ToString();
 			pictureBox1->Image = (Image^)bitmap;
 		}
 		finally

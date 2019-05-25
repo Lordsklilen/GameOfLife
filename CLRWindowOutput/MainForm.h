@@ -66,6 +66,7 @@ namespace CLRWindowOutput {
 		Brush^ grayBrush;
 		DrawingHelper^ drawingHelper;
 		Button^  stopbtn;
+		Label^  FPS_number;
 	private: System::Windows::Forms::MenuStrip^  menuStrip1;
 	public:
 	private: System::Windows::Forms::ToolStripMenuItem^  fileToolStripMenuItem;
@@ -115,6 +116,7 @@ namespace CLRWindowOutput {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->Y_numericUpDown2 = (gcnew System::Windows::Forms::NumericUpDown());
+			this->FPS_number = (gcnew System::Windows::Forms::Label());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->pictureBox1))->BeginInit();
 			this->menuStrip1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->numericUpDown1))->BeginInit();
@@ -177,14 +179,14 @@ namespace CLRWindowOutput {
 			// saveGameStateToolStripMenuItem
 			// 
 			this->saveGameStateToolStripMenuItem->Name = L"saveGameStateToolStripMenuItem";
-			this->saveGameStateToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->saveGameStateToolStripMenuItem->Size = System::Drawing::Size(161, 22);
 			this->saveGameStateToolStripMenuItem->Text = L"Save game state";
 			this->saveGameStateToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::saveGameStateToolStripMenuItem_Click);
 			// 
 			// loadGameStateToolStripMenuItem
 			// 
 			this->loadGameStateToolStripMenuItem->Name = L"loadGameStateToolStripMenuItem";
-			this->loadGameStateToolStripMenuItem->Size = System::Drawing::Size(180, 22);
+			this->loadGameStateToolStripMenuItem->Size = System::Drawing::Size(161, 22);
 			this->loadGameStateToolStripMenuItem->Text = L"Load game state";
 			this->loadGameStateToolStripMenuItem->Click += gcnew System::EventHandler(this, &MainForm::loadGameStateToolStripMenuItem_Click);
 			// 
@@ -278,7 +280,7 @@ namespace CLRWindowOutput {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(860, 32);
+			this->label1->Location = System::Drawing::Point(767, 32);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(99, 13);
 			this->label1->TabIndex = 6;
@@ -286,10 +288,10 @@ namespace CLRWindowOutput {
 			// 
 			// numericUpDown1
 			// 
-			this->numericUpDown1->Location = System::Drawing::Point(965, 27);
+			this->numericUpDown1->Location = System::Drawing::Point(872, 27);
 			this->numericUpDown1->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
 			this->numericUpDown1->Name = L"numericUpDown1";
-			this->numericUpDown1->Size = System::Drawing::Size(89, 20);
+			this->numericUpDown1->Size = System::Drawing::Size(49, 20);
 			this->numericUpDown1->TabIndex = 8;
 			this->numericUpDown1->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 4, 0, 0, 0 });
 			this->numericUpDown1->ValueChanged += gcnew System::EventHandler(this, &MainForm::numericUpDown1_ValueChanged);
@@ -307,6 +309,7 @@ namespace CLRWindowOutput {
 			// X_numericUpDown2
 			// 
 			this->X_numericUpDown2->Location = System::Drawing::Point(548, 30);
+			this->X_numericUpDown2->Maximum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 200, 0, 0, 0 });
 			this->X_numericUpDown2->Minimum = System::Decimal(gcnew cli::array< System::Int32 >(4) { 1, 0, 0, 0 });
 			this->X_numericUpDown2->Name = L"X_numericUpDown2";
 			this->X_numericUpDown2->Size = System::Drawing::Size(53, 20);
@@ -340,11 +343,21 @@ namespace CLRWindowOutput {
 			this->Y_numericUpDown2->TabIndex = 13;
 			this->Y_numericUpDown2->Value = System::Decimal(gcnew cli::array< System::Int32 >(4) { 25, 0, 0, 0 });
 			// 
+			// FPS_number
+			// 
+			this->FPS_number->AutoSize = true;
+			this->FPS_number->Location = System::Drawing::Point(1003, 29);
+			this->FPS_number->Name = L"FPS_number";
+			this->FPS_number->Size = System::Drawing::Size(39, 13);
+			this->FPS_number->TabIndex = 15;
+			this->FPS_number->Text = L"FPS: 0";
+			// 
 			// MainForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(1073, 582);
+			this->Controls->Add(this->FPS_number);
 			this->Controls->Add(this->label3);
 			this->Controls->Add(this->Y_numericUpDown2);
 			this->Controls->Add(this->label2);
