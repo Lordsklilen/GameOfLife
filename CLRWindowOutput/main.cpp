@@ -5,7 +5,7 @@ using namespace System::Windows::Forms;
 using namespace CLRWindowOutput;
 
 [STAThreadAttribute]
-int Main()
+int main()
 {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);

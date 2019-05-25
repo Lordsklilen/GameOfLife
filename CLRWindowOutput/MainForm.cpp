@@ -82,9 +82,9 @@ void MainForm::InitProgram() {
 void MainForm::ClearForm(bool clear) {
 	stopbtn_Click(nullptr, nullptr);
 	engine.CreateBoard(drawingHelper->heightSize, drawingHelper->widthSize,clear);
-	myTimer->Interval = Maxmilisecond / (int)numericUpDown1->Value;
+	int fps = (int)numericUpDown1->Value;
+	myTimer->Interval = Maxmilisecond / fps;
 	RedrawBoard();
-
 }
 
 void MainForm::InitVariables() {
@@ -203,8 +203,11 @@ Void MainForm::PrevBtn_Click(Object^  sender, EventArgs^  e) {
 }
 
 Void MainForm::numericUpDown1_ValueChanged(Object^  sender, EventArgs^  e) {
-	int fps = Maxmilisecond /(int)numericUpDown1->Value;
-	myTimer->Interval = fps;
+	int fps = (int)numericUpDown1->Value;
+	if (Maxmilisecond / fps <= 26)
+		myTimer->Interval = 10;
+	else
+		myTimer->Interval = Maxmilisecond / fps;
 }
 
 Void MainForm::newGame_btn_Click(System::Object^  sender, System::EventArgs^  e) {

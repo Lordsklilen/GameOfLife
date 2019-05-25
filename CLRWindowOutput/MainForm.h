@@ -83,6 +83,7 @@ namespace CLRWindowOutput {
 	private: System::Windows::Forms::Button^  button2;
 	private: System::Windows::Forms::ToolStripMenuItem^  queenBeeShuttleToolStripMenuItem;
 	private: System::Windows::Forms::Label^  label1;
+	//private: System::Windows::Forms::Label^  FPS_number;
 	private: System::Windows::Forms::NumericUpDown^  numericUpDown1;
 
 	public:
