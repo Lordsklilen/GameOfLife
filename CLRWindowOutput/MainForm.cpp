@@ -234,9 +234,8 @@ Void MainForm::PrevBtn_Click(Object^  sender, EventArgs^  e) {
 
 Void MainForm::numericUpDown1_ValueChanged(Object^  sender, EventArgs^  e) {
 	int fps = (int)numericUpDown1->Value;
-	if (Maxmilisecond / fps <= 26)
-		myTimer->Interval = 10;
-	else
+	if (fps <= 0)
+		fps = 1000;
 		myTimer->Interval = Maxmilisecond / fps;
 }
 
