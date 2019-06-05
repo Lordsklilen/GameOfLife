@@ -80,21 +80,33 @@ void MainForm::InitProgram() {
 }
 
 void MainForm::ClearForm(bool clear) {
-	stopbtn_Click(nullptr, nullptr);
-	engine.CreateBoard(drawingHelper->heightSize, drawingHelper->widthSize,clear);
-	int fps = (int)numericUpDown1->Value;
-	myTimer->Interval = Maxmilisecond / fps;
-	RedrawBoard();
+	try {
+		stopbtn_Click(nullptr, nullptr);
+		engine.CreateBoard(drawingHelper->heightSize, drawingHelper->widthSize, clear);
+		int fps = (int)numericUpDown1->Value;
+		myTimer->Interval = Maxmilisecond / fps;
+		RedrawBoard();
+	}
+	catch (exception ex) {
+		String^ message = gcnew String(ex.what());
+		MessageBox::Show(message, "Error occured.");
+	}
 }
 
 void MainForm::InitVariables() {
-	graphics = pictureBox1->CreateGraphics();
-	greenBrush = gcnew SolidBrush(Color::Green);
-	grayBrush = gcnew SolidBrush(Color::Gray);
-	myTimer = gcnew System::Windows::Forms::Timer;
-	drawingHelper = gcnew DrawingHelper(pictureBox1->Width, pictureBox1->Height, height, width);
-	engine = EngineFacade();
-	ThreadExecute::InitThread(this);
+	try {
+		graphics = pictureBox1->CreateGraphics();
+		greenBrush = gcnew SolidBrush(Color::Green);
+		grayBrush = gcnew SolidBrush(Color::Gray);
+		myTimer = gcnew System::Windows::Forms::Timer;
+		drawingHelper = gcnew DrawingHelper(pictureBox1->Width, pictureBox1->Height, height, width);
+		engine = EngineFacade();
+		ThreadExecute::InitThread(this);
+	}
+	catch (exception ex) {
+		String^ message = gcnew String(ex.what());
+		MessageBox::Show(message, "Error occured.");
+	}
 }
 
 void MainForm::SetConfig(shared_ptr<RLEstorage> storage) {
@@ -147,50 +159,68 @@ void MarshalString(String ^ s, string& os) {
 }
 
 Void MainForm::saveGameStateToolStripMenuItem_Click(Object^  sender, EventArgs^  e) {
-	SaveFileDialog^ sfd = gcnew SaveFileDialog();
-	string path = "";
-	sfd->Filter = "Pliki RLE (*.rle)|*.rle|Wszystkie pliki (*.*)|*.*";
-	if (sfd->ShowDialog() == ::DialogResult::OK)
-	{
-		MarshalString(sfd->FileName->ToString(), path);
-		if (engine.SaveFile(path)) {
-			MessageBox::Show("Saved successfully", "Save state");
+	try {
+		SaveFileDialog^ sfd = gcnew SaveFileDialog();
+		string path = "";
+		sfd->Filter = "Pliki RLE (*.rle)|*.rle|Wszystkie pliki (*.*)|*.*";
+		if (sfd->ShowDialog() == ::DialogResult::OK)
+		{
+			MarshalString(sfd->FileName->ToString(), path);
+			if (engine.SaveFile(path)) {
+				MessageBox::Show("Saved successfully", "Save state");
+			}
+			else {
+				MessageBox::Show("Error occured", "Something went wrong");
+			}
 		}
-		else {
-			MessageBox::Show("Error occured", "Something went wrong");
-		}
+	}
+	catch (exception ex) {
+		String^ message = gcnew String(ex.what());
+		MessageBox::Show(message, "Error occured");
 	}
 }
 
 Void MainForm::loadGameStateToolStripMenuItem_Click(Object^  sender, EventArgs^  e) {
-	stopbtn_Click(nullptr, nullptr);
-	OpenFileDialog ^ sfd = gcnew OpenFileDialog();
-	string path = "";
-	sfd->Filter = "Pliki RLE (*.rle)|*.rle|Wszystkie pliki (*.*)|*.*";
-	if (sfd->ShowDialog() == ::DialogResult::OK)
-	{
-		MarshalString(sfd->FileName->ToString(), path);
-		auto storage = engine.LoadFile(path);
-		width = storage == nullptr ? 50 : storage->y;
-		height = storage == nullptr ? 25 : storage->x;
-		if (storage != nullptr) {
-			X_numericUpDown2->Value = storage->y;
-			Y_numericUpDown2->Value = storage->x;
+	try {
+		stopbtn_Click(nullptr, nullptr);
+		OpenFileDialog ^ sfd = gcnew OpenFileDialog();
+		string path = "";
+		sfd->Filter = "Pliki RLE (*.rle)|*.rle|Wszystkie pliki (*.*)|*.*";
+		if (sfd->ShowDialog() == ::DialogResult::OK)
+		{
+			MarshalString(sfd->FileName->ToString(), path);
+			auto storage = engine.LoadFile(path);
+			width = storage == nullptr ? 50 : storage->y;
+			height = storage == nullptr ? 25 : storage->x;
+			if (storage != nullptr) {
+				X_numericUpDown2->Value = storage->y;
+				Y_numericUpDown2->Value = storage->x;
+			}
+			drawingHelper->ResetState(height, width);
+			RedrawBoard();
 		}
-		drawingHelper->ResetState(height, width);
-		RedrawBoard();
+	}
+	catch (exception ex) {
+		String^ message = gcnew String(ex.what());
+		MessageBox::Show(message, "Error occured");
 	}
 }
 
 Void MainForm::templateToolStripMenuItem_Click(Object^  sender, EventArgs^  e) {
-	auto senderText = ((ToolStripMenuItem^)sender);
-	string name;
-	MarshalString(senderText->Text, name);
-	auto storage = engine.LoadTemplate(name);
-	width = storage == nullptr ? 50 : storage->y;
-	height = storage == nullptr ? 25 : storage->x;
-	drawingHelper->ResetState(height, width);
-	RedrawBoard();
+	try {
+		auto senderText = ((ToolStripMenuItem^)sender);
+		string name;
+		MarshalString(senderText->Text, name);
+		auto storage = engine.LoadTemplate(name);
+		width = storage == nullptr ? 50 : storage->y;
+		height = storage == nullptr ? 25 : storage->x;
+		drawingHelper->ResetState(height, width);
+		RedrawBoard();
+	}
+	catch (exception ex) {
+		String^ message = gcnew String(ex.what());
+		MessageBox::Show(message, "Error occured");
+	}
 }
 
 Void MainForm::NextBtn_Click(Object^  sender, EventArgs^  e) {
@@ -213,6 +243,7 @@ Void MainForm::numericUpDown1_ValueChanged(Object^  sender, EventArgs^  e) {
 Void MainForm::newGame_btn_Click(System::Object^  sender, System::EventArgs^  e) {
 	SetConfig(nullptr);
 }
+
 Void MainForm::clear_btn_Click(System::Object^  sender, System::EventArgs^  e) {
 	ClearForm(true);
 }

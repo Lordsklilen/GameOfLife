@@ -9,7 +9,10 @@ EngineFacade::EngineFacade() {
 EngineFacade::~EngineFacade() {}
 
 void EngineFacade::CreateBoard(int x, int y, bool memento) {
-	if(memento)
+	if (x <= 0 || y <= 0) {
+		throw new exception("error while creating Board");
+	}
+	if (memento)
 		CreateMemento();
 	this->board = make_shared<Board>(x, y);
 	if (!memento)
@@ -35,12 +38,14 @@ void EngineFacade::SetBlock(int x, int y) {
 };
 
 shared_ptr<RLEstorage> EngineFacade::LoadFile(string path) {
+
 	CreateMemento();
 	auto storage = fileManager->LoadFile(path);
 	this->board->blockBoard = storage.blockBoard;
 	this->board->x = storage.x;
 	this->board->y = storage.y;
 	return make_shared<RLEstorage>(storage);
+
 }
 
 shared_ptr<RLEstorage> EngineFacade::LoadTemplate(string name) {
@@ -79,6 +84,6 @@ void EngineFacade::CreateMemento() {
 
 void EngineFacade::RestoreMemento() {
 	auto mem = mementoManager.GetState();
-	if(mem != nullptr)
+	if (mem != nullptr)
 		board->blockBoard = mem->blockBoard;
 }
