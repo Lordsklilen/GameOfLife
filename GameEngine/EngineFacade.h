@@ -15,7 +15,7 @@ class EngineFacade
 private:
 	shared_ptr<Board> board;
 	shared_ptr<RLEHelper> fileManager;
-	shared_ptr<BoardMemento> mementoManager;
+	BoardMemento<MementoStorage> mementoManager;
 	RLEstorage CreateGameState(string path);
 	void CreateMemento();
 	void RestoreMemento();

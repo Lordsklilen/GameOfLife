@@ -1,11 +1,9 @@
 #include "EngineFacade.h"
 
-
-
 using namespace std;
 EngineFacade::EngineFacade() {
 	this->fileManager = make_shared<RLEHelper>();
-	this->mementoManager = make_shared<BoardMemento>();
+	this->mementoManager = BoardMemento<MementoStorage>();
 }
 
 EngineFacade::~EngineFacade() {}
@@ -75,12 +73,12 @@ void EngineFacade::CreateMemento() {
 	if (!b.empty()) {
 		MementoStorage mem;
 		mem.blockBoard = b;
-		mementoManager->SetState(move(mem));
+		mementoManager.SetState(move(mem));
 	}
 }
 
 void EngineFacade::RestoreMemento() {
-	auto mem = mementoManager->GetState();
+	auto mem = mementoManager.GetState();
 	if(mem != nullptr)
 		board->blockBoard = mem->blockBoard;
 }
