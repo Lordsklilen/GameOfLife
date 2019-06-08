@@ -73,6 +73,15 @@ public:
 	}
 };
 
+
+void MarshalString(String ^ s, string& os) {
+	using namespace Runtime::InteropServices;
+	const char* chars =
+		(const char*)(Marshal::StringToHGlobalAnsi(s)).ToPointer();
+	os = chars;
+	Marshal::FreeHGlobal(IntPtr((void*)chars));
+}
+
 void MainForm::InitProgram() {
 	Maxmilisecond = 1000;
 	myTimer->Tick += gcnew EventHandler(ThreadExecute::ThreadProc);
@@ -149,14 +158,6 @@ Void MainForm::pictureBox1_MouseClick(Object^  sender, MouseEventArgs^  e) {
 	engine.SetBlock(pos->y, pos->x);
 	RedrawBoard();
 };
-
-void MarshalString(String ^ s, string& os) {
-	using namespace Runtime::InteropServices;
-	const char* chars =
-		(const char*)(Marshal::StringToHGlobalAnsi(s)).ToPointer();
-	os = chars;
-	Marshal::FreeHGlobal(IntPtr((void*)chars));
-}
 
 Void MainForm::saveGameStateToolStripMenuItem_Click(Object^  sender, EventArgs^  e) {
 	try {

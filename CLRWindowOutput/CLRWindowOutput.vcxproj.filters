@@ -110,5 +110,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="app.config" />
   </ItemGroup>
 </Project>
