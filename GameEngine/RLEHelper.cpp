@@ -35,15 +35,16 @@ RLEstorage RLEHelper::LoadFile(string path) {
 		int j = 0;
 		typ = line[0];
 		while (typ != '$') {
-			line.erase(0, 1);
 			int counter = stoi(line);
 			line.erase(0, GetNumberOfDigits(counter));
+			typ = line[0];
 			for (int tmp = 0; tmp < counter; tmp++) {
 				if (typ == 'o')
 					storage.blockBoard[i].push_back(Block(j + tmp, i, true));
 				else
 					storage.blockBoard[i].push_back(Block(j + tmp, i, false));
 			}
+			line.erase(0, 1);
 			j += counter;
 			typ = line[0];
 		}
@@ -94,17 +95,17 @@ string RLEHelper::CreateOutputStream(RLEstorage storage) {
 			}
 
 			if (cell.isAlive && currentChar == 'b') {
-				ss << dead << counter;
+				ss << counter << dead;
 				currentChar = alive;
 				counter = 0;
 			}
 			else if (!cell.isAlive && currentChar == 'o') {
-				ss << alive << counter;
+				ss << counter << alive;
 				currentChar = dead;
 				counter = 0;
 			}
 		}
-		ss << currentChar << counter;
+		ss << counter << currentChar;
 		ss << "$\n";
 	}
 	return ss.str();
